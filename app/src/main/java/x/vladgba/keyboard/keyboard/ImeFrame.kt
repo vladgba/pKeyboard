@@ -94,6 +94,8 @@ class ImeFrame(ctx: Context, private val kb: Keyboard) : ViewGroup(ctx) {
     private var navInset = 0
 
     init {
+        // Protect suggestions, drawers, popups and the navigation strip as well as the keys.
+        if (Build.VERSION.SDK_INT >= 29) isForceDarkAllowed = false
         (keyboardView.parent as? ViewGroup)?.removeView(keyboardView)
         addView(keyboardView)
         addView(bar)

@@ -6,6 +6,7 @@ import android.content.res.Configuration
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
+import android.os.Build
 import android.view.View
 import x.vladgba.keyboard.core.*
 import x.vladgba.keyboard.flex.FlexNode
@@ -19,6 +20,11 @@ import kotlin.math.min
  */
 @SuppressLint("ViewConstructor")
 internal class LayoutPreview(ctx: Context, private val rowHeightDp: Int = 26) : View(ctx) {
+    init {
+        // Match the keyboard palette rather than Android's automatic dark-mode conversion.
+        if (Build.VERSION.SDK_INT >= 29) isForceDarkAllowed = false
+    }
+
     class KeyRect(val row: Int, val index: Int, val rect: RectF, val label: String)
 
     var layout: FlexNode = FlexNode()

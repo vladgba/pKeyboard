@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.DashPathEffect
 import android.graphics.Paint
 import android.graphics.RectF
+import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import x.vladgba.keyboard.R
@@ -22,6 +23,11 @@ import kotlin.math.min
  */
 @SuppressLint("ViewConstructor")
 internal class ThemePreview(ctx: Context, private val compact: Boolean = false) : View(ctx) {
+    init {
+        // Show the actual theme colors even when Android automatically darkens the activity.
+        if (Build.VERSION.SDK_INT >= 29) isForceDarkAllowed = false
+    }
+
     /** Color lookup by theme key. */
     var colors: (String) -> Int = { 0xff888888.toInt() }
         set(v) { field = v; invalidate() }

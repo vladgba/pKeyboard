@@ -4,12 +4,18 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Canvas
+import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 
 /** The keyboard surface. All logic is delegated to [Keyboard]. */
 @SuppressLint("ViewConstructor")
 class KeyboardView(ctx: Context, private val kb: Keyboard) : View(ctx) {
+    init {
+        // Theme colors already handle night mode, including custom palettes in the editor.
+        if (Build.VERSION.SDK_INT >= 29) isForceDarkAllowed = false
+    }
+
     /** Set inside the input method: popups are drawn there, so they can leave the keyboard. */
     var overlay: View? = null
 

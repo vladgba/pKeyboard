@@ -103,7 +103,7 @@ Enable **Expanded language layouts** in Settings to make the additional Arabic, 
 
 `code`: a negative value is an Android `KeyEvent` keycode. `mode`: `popup` / `joy` / `meta` / `random`. `layout`: `@NEXT`, `@PREV`, `@NUM`, `@TEXT`, `@EMOJI` or a layout name. Other options: `hold`, `hard`, `text`, `textCurOffset`, `clipboard`, `record`, `action`, `@VOICE`, `@COMPOSE`, `@DELETE_WORD`, `@DELETE_WORD_FORWARD`, `@CLIPBOARD`, `@DEAD:<name>`, `@COMPLETE_1`/`_2`/`_3`, `@tr_voice/<src>-<dst>` (e.g. `@tr_voice/ru-en` for voice translation), `sound*`, `vib*`, and the style keys listed in `core/Constants.kt`.
 
-Popup slots accept negative decimal keycodes (`"-61"` sends Tab), combinations (`"shift+-61"` sends Shift+Tab), and the same special actions as hold/heavy press. Surrounding whitespace is ignored for actions and keycodes; ordinary text keeps its whitespace, and positive digits remain literal characters.
+Popup slots accept negative decimal keycodes (`"-61"` sends Tab), combinations (`"shift+-61"` sends Shift+Tab), and the same special actions as hold/heavy press. Surrounding whitespace is ignored for actions and keycodes, and a Unicode minus (`−61`, as some keyboards type it) counts as `-`; a slot like `(key: "-61")` is also a keycode; ordinary text keeps its whitespace, and positive digits remain literal characters.
 
 A popup position can also be a settings node, using the same parentheses/array syntax as a main key:
 
@@ -127,4 +127,4 @@ Supported popup settings:
 
 If multiple actions are present, precedence is `macro`, `combo`, `layout`, `text`, `code`, then `key`. Popup actions do not inherit the main key's action settings. Nested popup positions and other main-key settings are rejected by validation. Existing string slots retain their behavior.
 
-In the layout editor, tap a popup position and choose **Action**, **Literal text**, or **Key settings**. Key settings retain the full node when reopened and show an error instead of saving invalid input.
+In the layout editor, tap a popup position and choose **Action**, **Key code** (type `-61`, `61` or `tab`, or pick from the list; always stored as `(code: "-61")`), **Literal text** (typed exactly, so `-61` inserts those characters), or **Key settings**. Key settings retain the full node when reopened and show an error instead of saving invalid input.

@@ -23,9 +23,14 @@ internal data class PopupAction(
     ) {
         when (type) {
             Type.ACTION -> KeyValue.dispatch(value, onKey, onText, runSpecial, singleCharacterAsKey = true)
-            Type.LABEL -> if (!runSpecial(value.trim())) {
-                val label = resolveLabel(value)
-                if (label.isNotEmpty()) onKey(label.codePointAt(0))
+            // `(key: "-61")` is a key code, as in an action slot, not the '-' of its label.
+            Type.LABEL -> {
+                val code = KeyValue.keyCode(value)
+                if (code != null) onKey(code)
+                else if (!runSpecial(value.trim())) {
+                    val label = resolveLabel(value)
+                    if (label.isNotEmpty()) onKey(label.codePointAt(0))
+                }
             }
             Type.CODE -> onKey(number(value)!!)
             Type.COMBO -> sendCombo(value)
@@ -40,9 +45,9 @@ internal data class PopupAction(
     }
 
     fun label(keyLabel: (Int) -> String, resolveLabel: (String) -> String = { it }): String =
-        caption?.let(resolveLabel) ?: when (type) {
+        caption?.takeUnless { type == Type.LABEL && KeyValue.keyCode(it) != null }?.let(resolveLabel) ?: when (type) {
             Type.CODE -> number(value)!!.let { if (it < 0) keyLabel(-it) else if (it == 0) "" else String(Character.toChars(it)) }
-            Type.ACTION -> value.trim().toIntOrNull()?.takeIf { it < 0 && it != Int.MIN_VALUE }?.let { keyLabel(-it) } ?: value
+            Type.ACTION, Type.LABEL -> KeyValue.keyCode(value)?.let { keyLabel(-it) } ?: value
             else -> value
         }
 
@@ -51,7 +56,7 @@ internal data class PopupAction(
 
         /** Decimal and hex integers, without FlexNode.parseInt's truncation of oversized hex values. */
         fun number(raw: String): Int? {
-            val s = raw.trim()
+            val s = KeyValue.normalizeSign(raw)
             val negative = s.startsWith('-')
             val body = if (negative) s.drop(1) else s
             if (negative && (body.startsWith('-') || body.startsWith('+'))) return null

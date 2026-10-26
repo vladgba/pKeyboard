@@ -35,6 +35,10 @@ fun checkPopupActions() {
         "(key: \"@VOICE\")" to listOf("action:@VOICE"),
         "(key: \"@string/test\")" to listOf("key:233"),
         "(key: abc)" to listOf("key:97"),
+        "(key: \"-61\")" to listOf("key:-61"),
+        "(key: \"\u221261\")" to listOf("key:-61"),
+        "(code: \"\u221261\")" to listOf("key:-61"),
+        "(key: \"-\")" to listOf("key:45"),
     )
     for ((source, expected) in cases) {
         val slot = node(source)
@@ -54,6 +58,16 @@ fun checkPopupActions() {
     check(PopupAction.from(" -61 ")!!.label({ "code:$it" }) == "code:61")
     check(events("-61") == listOf("key:-61") && events("61") == listOf("text:61"))
     check(events("(x)") == listOf("text:(x)"))
+    // Minus look-alikes from phone keyboards still mean a key code; a lone dash stays a character.
+    for (minus in listOf("\u2212", "\u2013", "\u2014", "\uFF0D")) check(events(" ${minus}61 ") == listOf("key:-61")) { minus }
+    // Escaped non-ASCII followed by hex-digit characters must survive saving and reloading.
+    for (raw in listOf("\u221261", "é1", "éa", "😀f", "\u0001F", "ж")) {
+        val saved = FlexNode().apply { this[0] = raw }
+        check(FlexParser(saved.toStr(0, false, true)) { }.parse().str(0) == raw) { raw }
+    }
+    check(events("-") == listOf("key:45") && events("\u2212") == listOf("key:8722"))
+    check(PopupAction.from(node("(key: \"-61\")"))!!.label({ "code:$it" }) == "code:61")
+    check(PopupAction.from(node("(key: Tab, code: -61)"))!!.label({ "code:$it" }) == "Tab")
     val inherited = FlexNode().apply { this[KEY_CODE] = "-67"; this[KEY_TEXT] = "wrong" }
     val independent = node("(code: -61)").apply { parent = inherited }
     check(events(independent) == listOf("key:-61"))

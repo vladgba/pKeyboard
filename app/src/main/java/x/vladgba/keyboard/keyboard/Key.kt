@@ -295,10 +295,8 @@ class Key(private val c: Keyboard, var row: Row, var x: Int, var y: Int, opts: F
      * Negative numbers are key codes (like `code`), `"ctrl+c"` is a key combination,
      * `"macro:name"` runs a macro, anything else is text.
      */
-    private fun emit(value: String) {
-        val n = if (value.startsWith("-")) value.toIntOrNull() else null
-        if (n != null) c.onKey(n) else if (!c.runSpecial(value)) c.onText(value)
-    }
+    private fun emit(value: String, singleCharacterAsKey: Boolean = false) =
+        KeyValue.dispatch(value, c::onKey, c::onText, c::runSpecial, singleCharacterAsKey)
 
     private fun modifierMapping(): Boolean {
         if (!Settings.bool(SETTING_MODIFIER_MAPPINGS, false)) return false
@@ -521,12 +519,7 @@ class Key(private val c: Keyboard, var row: Row, var x: Int, var y: Int, opts: F
 
     private fun prExtChars(node: FlexNode = this): Boolean {
         if (node.childCount() == 0 || charPos < 1) return false
-        val s = node.str(charPos - 1)
-        if (s.isEmpty()) return true
-        if (c.runSpecial(s)) return true
-        if (s.length > 1 && s.startsWith("-")) s.toIntOrNull()?.let { c.onKey(it); return true }
-        if (s.codePointCount(0, s.length) > 1) c.onText(s)
-        else c.onKey(s.codePointAt(0))
+        emit(node.str(charPos - 1), singleCharacterAsKey = true)
         return true
     }
 

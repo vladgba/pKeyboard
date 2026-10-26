@@ -17,9 +17,10 @@ fun main() {
     checkLayoutRoundTrips()
     checkGeneratedRows()
     checkModifierMappings()
+    checkKeyValues()
     checkUnicodeWords()
     checkEmojiExtraction()
-    println("PASS keyboard logic: compose/dead keys, 250 layout round-trips, generated rows, modifier maps, Unicode and emoji boundaries")
+    println("PASS keyboard logic: compose/dead keys, 250 layout round-trips, generated rows, modifier maps, key values, Unicode and emoji boundaries")
 }
 
 private fun checkComposeAndDeadKeys() {

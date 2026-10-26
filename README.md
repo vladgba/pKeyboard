@@ -102,3 +102,5 @@ Enable **Expanded language layouts** in Settings to make the additional Arabic, 
 ```
 
 `code`: a negative value is an Android `KeyEvent` keycode. `mode`: `popup` / `joy` / `meta` / `random`. `layout`: `@NEXT`, `@PREV`, `@NUM`, `@TEXT`, `@EMOJI` or a layout name. Other options: `hold`, `hard`, `text`, `textCurOffset`, `clipboard`, `record`, `action`, `@VOICE`, `@COMPOSE`, `@DELETE_WORD`, `@DELETE_WORD_FORWARD`, `@CLIPBOARD`, `@DEAD:<name>`, `@COMPLETE_1`/`_2`/`_3`, `@tr_voice/<src>-<dst>` (e.g. `@tr_voice/ru-en` for voice translation), `sound*`, `vib*`, and the style keys listed in `core/Constants.kt`.
+
+Popup slots accept negative decimal keycodes (`"-61"` sends Tab), combinations (`"shift+-61"` sends Shift+Tab), and the same special actions as hold/heavy press. Surrounding whitespace is ignored for actions and keycodes; ordinary text keeps its whitespace, and positive digits remain literal characters.

@@ -772,4 +772,10 @@
     <string name="bk_restore_fail">Failed to restore backup</string>
     <string name="bk_export_success">Backup saved successfully</string>
     <string name="bk_export_fail">Failed to save backup</string>
+    <string name="ui_popup_action">Action</string>
+    <string name="ui_popup_literal">Literal text</string>
+    <string name="ui_popup_settings">Key settings</string>
+    <string name="ui_popup_literal_help">Insert the text exactly as entered, including numbers and action names.</string>
+    <string name="ui_popup_settings_help">Example: (key: \"Tab\", code: \"-61\", meta: \"1\") sends Shift+Tab. Settings: key, code, text, meta, combo, macro, layout, textCurOffset.</string>
+    <string name="ui_popup_bad_combo">Invalid key combination</string>
 </resources>

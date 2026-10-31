@@ -21,6 +21,7 @@ abstract class LocalizedActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         localeVersion = AppLocale.version
+        UiPalette.load(this)
         super.onCreate(savedInstanceState)
         // Before Android 13 the system loads manifest labels in the phone language; reload ours.
         if (Build.VERSION.SDK_INT < 33) try {
@@ -43,9 +44,10 @@ abstract class LocalizedActivity : Activity() {
     private fun fitSystemBars() {
         if (Build.VERSION.SDK_INT < 35) return
         val content = findViewById<View>(android.R.id.content) ?: return
-        // The app always uses a light theme: dark status bar icons stay readable over it.
+        // pUI follows the system dark mode: light bar icons only on the light palette.
+        val light = resources.getBoolean(x.vladgba.keyboard.R.bool.p_light_bars)
         window.insetsController?.setSystemBarsAppearance(
-            WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+            if (light) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0,
             WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
         )
         // The action bar's own layout already adds its height to the top inset it hands the content.

@@ -190,7 +190,7 @@ class RawEditor : LocalizedActivity() {
             setBackgroundColor(COLOR_CARD)
             setPadding(dp(10), dp(4), dp(10), dp(4))
             crumb = TextView(context).apply {
-                textSize = 13f; setTextColor(0xff3c4043.toInt()); isSingleLine = true; ellipsize = TextUtils.TruncateAt.START
+                textSize = 13f; setTextColor(UiPalette.secondary); isSingleLine = true; ellipsize = TextUtils.TruncateAt.START
             }
             addView(crumb, LinearLayout.LayoutParams(0, -2, 1f))
             badge = TextView(context).apply {
@@ -219,7 +219,7 @@ class RawEditor : LocalizedActivity() {
         bar.addView(barButton("＋", R.string.re_insert) { showInsertMenu() })
         root.addView(HorizontalScrollView(this).apply {
             isHorizontalScrollBarEnabled = false
-            setBackgroundColor(0xffe8eaed.toInt())
+            setBackgroundColor(UiPalette.surface2)
             addView(bar)
         })
 
@@ -240,7 +240,7 @@ class RawEditor : LocalizedActivity() {
         gravity = Gravity.CENTER
         minWidth = dp(44)
         setPadding(dp(8), dp(8), dp(8), dp(8))
-        setTextColor(0xff202124.toInt())
+        setTextColor(UiPalette.text)
         selectableBackground()
         if (desc != null) {
             contentDescription = getString(desc)
@@ -326,7 +326,7 @@ class RawEditor : LocalizedActivity() {
         position.text = getString(R.string.re_pos, line + 1, c - editor.lineStart(line) + 1)
         crumb.text = describe(c)
         problems.firstOrNull { it.line == line }?.let { crumb.text = "⚠ " + it.msg }
-        crumb.setTextColor(if (problems.any { it.line == line }) COLOR_WARN else 0xff3c4043.toInt())
+        crumb.setTextColor(if (problems.any { it.line == line }) COLOR_WARN else UiPalette.secondary)
     }
 
     /** Human description of where the cursor is: "Row 2 › Key 3: q › swipe ↓". */

@@ -18,16 +18,42 @@ import android.app.AlertDialog
  * Plain framework widgets only, no libraries.
  */
 
-internal const val COLOR_ACCENT = 0xff1a73e8.toInt()
-internal const val COLOR_SECONDARY_TEXT = 0xff5f6368.toInt()
-internal const val COLOR_OK = 0xff188038.toInt()
-internal const val COLOR_WARN = 0xffd93025.toInt()
-internal const val COLOR_CARD = 0xfff1f3f4.toInt()
+/**
+ * Suite (pUI) colors for the screens built in code. Resolved from the p_* tokens by every
+ * LocalizedActivity, so they follow light/dark mode like the XML-themed parts.
+ */
+internal object UiPalette {
+    var accent = 0xff6d28d9.toInt(); private set
+    var text = 0xff16181d.toInt(); private set
+    var secondary = 0xff5f6370.toInt(); private set
+    var ok = 0xff1e8e5a.toInt(); private set
+    var warn = 0xffc62828.toInt(); private set
+    var card = 0xffffffff.toInt(); private set
+    var surface2 = 0xffececf1.toInt(); private set
+    var line = 0xffe2e2e8.toInt(); private set
+
+    fun load(ctx: Context) {
+        accent = ctx.getColor(x.vladgba.keyboard.R.color.p_accent_text)
+        text = ctx.getColor(x.vladgba.keyboard.R.color.p_text)
+        secondary = ctx.getColor(x.vladgba.keyboard.R.color.p_text2)
+        ok = ctx.getColor(x.vladgba.keyboard.R.color.p_success)
+        warn = ctx.getColor(x.vladgba.keyboard.R.color.p_danger)
+        card = ctx.getColor(x.vladgba.keyboard.R.color.p_surface)
+        surface2 = ctx.getColor(x.vladgba.keyboard.R.color.p_surface2)
+        line = ctx.getColor(x.vladgba.keyboard.R.color.p_line)
+    }
+}
+
+internal val COLOR_ACCENT get() = UiPalette.accent
+internal val COLOR_SECONDARY_TEXT get() = UiPalette.secondary
+internal val COLOR_OK get() = UiPalette.ok
+internal val COLOR_WARN get() = UiPalette.warn
+internal val COLOR_CARD get() = UiPalette.card
 
 internal fun Context.dp(v: Int) = (v * resources.displayMetrics.density).toInt()
 
 internal fun Context.copyToClipboard(text: String, toastMsg: String? = null) {
-    (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("VKeyboard", text))
+    (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("pKeyboard", text))
     if (toastMsg != null) Toast.makeText(this, toastMsg, Toast.LENGTH_SHORT).show()
 }
 
@@ -39,12 +65,12 @@ internal fun View.selectableBackground() {
 
 internal fun cardBackground(ctx: Context, color: Int = COLOR_CARD) = GradientDrawable().apply {
     setColor(color)
-    cornerRadius = ctx.dp(12).toFloat()
+    cornerRadius = ctx.dp(20).toFloat()
 }
 
 /** A list row: title, optional subtitle, optional view at the end. */
 internal class Row(ctx: Context) : LinearLayout(ctx) {
-    val title = TextView(ctx).apply { textSize = 16f; setTextColor(0xff202124.toInt()) }
+    val title = TextView(ctx).apply { textSize = 16f; setTextColor(UiPalette.text) }
     val subtitle = TextView(ctx).apply { textSize = 13f; setTextColor(COLOR_SECONDARY_TEXT); visibility = GONE }
     val end = FrameLayout(ctx)
     private val texts = LinearLayout(ctx).apply { orientation = VERTICAL }
@@ -86,8 +112,10 @@ internal class Page(private val ctx: Context) {
 
     fun header(text: CharSequence) = add(TextView(ctx).apply {
         this.text = text
-        textSize = 14f
-        setTypeface(typeface, Typeface.BOLD)
+        textSize = 12f
+        isAllCaps = true
+        letterSpacing = 0.08f
+        typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
         setTextColor(COLOR_ACCENT)
         setPadding(ctx.dp(4), ctx.dp(20), ctx.dp(4), ctx.dp(4))
     })

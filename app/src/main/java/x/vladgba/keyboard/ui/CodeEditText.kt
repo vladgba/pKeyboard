@@ -51,12 +51,14 @@ internal class CodeEditText(ctx: Context) : EditText(ctx) {
     private var lineStarts = IntArray(1)
 
     // --- colours (light editor, matches the rest of the settings UI) ---
-    private val cComment = 0xff8a8f98.toInt()
-    private val cString = 0xff0b7a3e.toInt()
-    private val cKey = 0xff1a5fb4.toInt()
-    private val cNumber = 0xffb5530a.toInt()
-    private val cWord = 0xff8e24aa.toInt()
-    private val cPunct = 0xff5f6368.toInt()
+    private val night = (context.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) ==
+        android.content.res.Configuration.UI_MODE_NIGHT_YES
+    private val cComment = if (night) 0xff8b909a.toInt() else 0xff8a8f98.toInt()
+    private val cString = if (night) 0xff6fd39a.toInt() else 0xff0b7a3e.toInt()
+    private val cKey = if (night) 0xff8fb4ff.toInt() else 0xff1a5fb4.toInt()
+    private val cNumber = if (night) 0xffffb26b.toInt() else 0xffb5530a.toInt()
+    private val cWord = if (night) 0xffd0a8ff.toInt() else 0xff8e24aa.toInt()
+    private val cPunct = UiPalette.secondary
     private val rainbow = intArrayOf(0xff1a73e8.toInt(), 0xffd81b60.toInt(), 0xff00897b.toInt(), 0xffef6c00.toInt(), 0xff6d4c41.toInt())
 
     private class Fg(c: Int) : ForegroundColorSpan(c)
@@ -64,8 +66,8 @@ internal class CodeEditText(ctx: Context) : EditText(ctx) {
     private class Match(c: Int) : BackgroundColorSpan(c)
     private class Found(c: Int) : BackgroundColorSpan(c)
 
-    private val gutterBg = Paint().apply { color = 0xfff1f3f4.toInt() }
-    private val gutterLine = Paint().apply { color = 0xffdadce0.toInt() }
+    private val gutterBg = Paint().apply { color = UiPalette.surface2 }
+    private val gutterLine = Paint().apply { color = UiPalette.line }
     private val numPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { typeface = Typeface.MONOSPACE; textAlign = Paint.Align.RIGHT }
     private val curLine = Paint().apply { color = 0x141a73e8 }
     private val errLine = Paint().apply { color = 0x1ad93025 }
@@ -266,7 +268,7 @@ internal class CodeEditText(ctx: Context) : EditText(ctx) {
             val err = logical in errorLines
             numPaint.color = when {
                 err -> COLOR_WARN
-                logical == curLogical -> 0xff202124.toInt()
+                logical == curLogical -> UiPalette.text
                 else -> 0xff9aa0a6.toInt()
             }
             numPaint.isFakeBoldText = err || logical == curLogical
@@ -627,7 +629,7 @@ internal class CodeEditText(ctx: Context) : EditText(ctx) {
         setHorizontallyScrolling(true)
         background = null
         setBackgroundColor(Color.WHITE)
-        setTextColor(0xff202124.toInt())
+        setTextColor(UiPalette.text)
         isVerticalScrollBarEnabled = true
         isHorizontalScrollBarEnabled = true
         setLineSpacing(0f, 1.1f)

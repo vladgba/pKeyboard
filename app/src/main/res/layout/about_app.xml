@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="vladgba@gmail.com"
             android:padding="10dp"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="@color/p_accent_text"
             android:textSize="16sp"
             android:onClick="openMail"/>
 

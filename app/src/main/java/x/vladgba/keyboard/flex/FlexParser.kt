@@ -202,7 +202,7 @@ open class FlexParser(private val input: String, private val reporter: ((String)
         if (c == '0' && (peek(1) == 'x' || peek(1) == 'X')) {
             next()
             next()
-            return tokenizeHexNumber()
+            return tokenizeHexNumber(if (buffer.startsWith("-")) "-" else "")
         }
         while (c.isDigit() || (c == '.' && buffer.indexOf(".") == -1)) {
             buffer.append(c)
@@ -211,14 +211,19 @@ open class FlexParser(private val input: String, private val reporter: ((String)
         addToken(TokenType.NUM, buffer.toString())
     }
 
-    private fun tokenizeHexNumber() {
+    private fun tokenizeHexNumber(sign: String) {
         buffer.setLength(0)
+        buffer.append(sign).append("0x")
+        val prefixLength = buffer.length
         var c = peek(0)
         while (isHex(c) || c == '_') {
             if (c != '_') buffer.append(c) // `_` may be used as a digit separator
             c = next()
         }
-        if (buffer.isNotEmpty()) addToken(TokenType.HEX, buffer.toString())
+        if (buffer.length > prefixLength) addToken(TokenType.HEX, buffer.toString())
+        else {
+            warnings += ParseWarning("Hexadecimal number has no digits", row, col)
+        }
     }
 
     private fun isHex(c: Char) = c.isDigit() || c in 'a'..'f' || c in 'A'..'F'

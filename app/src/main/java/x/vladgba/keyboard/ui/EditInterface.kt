@@ -14,6 +14,7 @@ import x.vladgba.keyboard.keyboard.KeybLayout
 import x.vladgba.keyboard.keyboard.Key
 import x.vladgba.keyboard.keyboard.Keyboard
 import x.vladgba.keyboard.keyboard.Combos
+import x.vladgba.keyboard.keyboard.PopupAction
 
 /**
  * Touch handling of the layout editor:
@@ -202,11 +203,12 @@ class EditInterface(private val c: Keyboard, private val onChange: () -> Unit) {
         val popupButtons = intArrayOf(R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8)
         for ((i, id) in popupButtons.withIndex()) {
             val btn = dialog.findViewById<Button>(id)
-            btn.text = key().str(i)
+            fun caption() = PopupAction.from(key().childs.getOrNull(i))?.label(Combos::keyLabel) { Labels.resolve(ctx, it) }.orEmpty()
+            btn.text = caption()
             btn.setOnClickListener {
-                ActionPrompt.show(ctx, ctx.getString(R.string.ui_popup_char), key().str(i)) { value ->
+                PopupActionPrompt.show(ctx, key().childs.getOrNull(i)) { value ->
                     key()[i] = value
-                    btn.text = value
+                    btn.text = caption()
                     c.invalidate()
                 }
             }

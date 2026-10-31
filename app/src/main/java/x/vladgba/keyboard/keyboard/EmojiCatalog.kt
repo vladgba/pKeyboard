@@ -27,7 +27,12 @@ object EmojiCatalog {
                 val text = key.str(KEY_TEXT)
                 if (text.isBlank()) continue
                 add(text)
-                for (variant in key.childs.filterIsInstance<String>()) add(variant)
+                for (slot in key.childs) {
+                    if (slot is String) add(slot)
+                    else PopupAction.from(slot)?.takeIf {
+                        it.meta == 0 && it.type in setOf(PopupAction.Type.TEXT, PopupAction.Type.LABEL)
+                    }?.let { add(it.value) }
+                }
             }
         }
         return output.toList()

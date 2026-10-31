@@ -1,5 +1,6 @@
 package x.vladgba.keyboard.core
 
+import x.vladgba.keyboard.keyboard.PopupAction
 import x.vladgba.keyboard.flex.FlexNode
 import x.vladgba.keyboard.flex.FlexParser
 
@@ -43,6 +44,15 @@ object LayoutValidator {
                     problems.add("$where has no label or action")
                 }
                 if (key.has(KEY_CODE) && FlexNode.parseInt(key.str(KEY_CODE)) == null) problems.add("$where has an invalid key code")
+                for ((index, slot) in key.childs.withIndex()) {
+                    if (slot !is FlexNode) continue
+                    val popupWhere = "$where, popup ${index + 1}"
+                    problems.addAll(PopupAction.problems(slot).map { "$popupWhere: $it" })
+                    val popupTarget = slot.str(KEY_LAYOUT)
+                    if (knownLayouts != null && popupTarget.isNotBlank() && !popupTarget.startsWith("@") && popupTarget !in knownLayouts) {
+                        problems.add("$popupWhere refers to missing layout: $popupTarget")
+                    }
+                }
                 val mode = key.str(KEY_MODE)
                 if (mode.isNotBlank() && mode !in setOf(KEY_MODE_META, KEY_MODE_JOY, KEY_MODE_POPUP, KEY_MODE_RANDOM)) problems.add("$where has an unknown mode: $mode")
                 val target = key.str(KEY_LAYOUT)

@@ -11,6 +11,11 @@ fun main(args: Array<String>) {
     check(LayoutValidator.validate("(((\"code\":\"bad\")))").isNotEmpty())
     check(LayoutValidator.validate("(((\"key\":\"go\",\"layout\":\"missing\")))", setOf("en")).isNotEmpty())
     check(LayoutValidator.validate("((()))").isNotEmpty())
+    check(LayoutValidator.validate("(((key: a, (key: Tab, code: -61, meta: 1), (text: \"-61\"), (combo: \"ctrl+-61\"))))").isEmpty())
+    for (popup in listOf("(code: bad)", "(code: 0x100000000)", "(meta: bad, text: x)", "(text: x, textCurOffset: 2)", "(hold: x)", "(combo: \"ctrl+\")", "(code: -61, (text: x))")) {
+        check(LayoutValidator.validate("(((key: a, $popup)))").any { "popup 1" in it }) { popup }
+    }
+    check(LayoutValidator.validate("(((key: a, (layout: missing))))", setOf("en")).any { "missing layout" in it })
     val folder = File(args.single())
     require(folder.isDirectory) { "Layout directory does not exist: $folder" }
     val files = folder.listFiles().orEmpty().filter { it.extension == "txt" && it.nameWithoutExtension !in setOf("settings", "blank") }.sortedBy { it.name }

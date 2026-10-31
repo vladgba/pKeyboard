@@ -13,6 +13,7 @@ import x.vladgba.keyboard.R
 import x.vladgba.keyboard.keyboard.DeadKeys
 import x.vladgba.keyboard.core.*
 import x.vladgba.keyboard.keyboard.Combos
+import x.vladgba.keyboard.keyboard.KeyValue
 import x.vladgba.keyboard.keyboard.Macros
 import x.vladgba.keyboard.keyboard.TranslationSpec
 import x.vladgba.keyboard.keyboard.VoiceInput
@@ -219,7 +220,7 @@ internal object ActionPrompt {
             return if (Macros.exists(ctx, name)) ctx.getString(R.string.ui_action_macro, name) to true
             else ctx.getString(R.string.ui_action_macro_missing, name) to false
         }
-        val n = v.toIntOrNull()
+        val n = KeyValue.normalizeSign(v).toIntOrNull()
         if (n != null && (n < 0 || numbersAreKeys)) {
             val code = if (n < 0) -n else n
             return if (n < 0) ctx.getString(R.string.ui_action_key, Combos.keyLabel(code)) to true

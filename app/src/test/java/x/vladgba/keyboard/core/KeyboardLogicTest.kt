@@ -17,9 +17,11 @@ fun main() {
     checkLayoutRoundTrips()
     checkGeneratedRows()
     checkModifierMappings()
+    checkKeyValues()
+    checkPopupActions()
     checkUnicodeWords()
     checkEmojiExtraction()
-    println("PASS keyboard logic: compose/dead keys, 250 layout round-trips, generated rows, modifier maps, Unicode and emoji boundaries")
+    println("PASS keyboard logic: compose/dead keys, 250 layout round-trips, generated rows, modifier maps, key values, structured popups, Unicode and emoji boundaries")
 }
 
 private fun checkComposeAndDeadKeys() {
@@ -154,6 +156,8 @@ private fun checkEmojiExtraction() {
     check(EmojiCatalog.entries(page) == listOf("😀", "👨‍👩‍👧", "🇺🇦"))
     val actions = parseLayout("(((\"text\":\"😀\",\"macro\":\"run\"),(\"text\":\"😀\",\"voice\":\"1\"),(\"text\":\"😀\",\"compose\":\"1\"),(\"text\":\"😀\",\"mode\":\"meta\"),(\"text\":\"😀\",\"ctrl+c\",\"Alt+F4\",\"🫶\")))")
     check(EmojiCatalog.entries(actions) == listOf("😀", "🫶"))
+    val structured = parseLayout("""(((text: "😀", (text: "🫶"), (key: "☺"), (key: "↹", code: -61), (text: "🙃", meta: 1), (combo: "ctrl+-61"))))""")
+    check(EmojiCatalog.entries(structured) == listOf("😀", "🫶", "☺"))
     val many = FlexNode().apply {
         childs.add(FlexNode().apply { repeat(EmojiCatalog.MAX_ENTRIES + 20) { n ->
             childs.add(FlexNode().apply { this[KEY_TEXT] = "😀$n" })

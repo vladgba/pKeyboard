@@ -103,3 +103,29 @@ Enable **Expanded language layouts** in Settings to make the additional Arabic, 
 ```
 
 `code`: a negative value is an Android `KeyEvent` keycode. `mode`: `popup` / `joy` / `meta` / `random`. `layout`: `@NEXT`, `@PREV`, `@NUM`, `@TEXT`, `@EMOJI` or a layout name. Other options: `hold`, `hard`, `text`, `textCurOffset`, `clipboard`, `record`, `action`, `@VOICE`, `@COMPOSE`, `@DELETE_WORD`, `@DELETE_WORD_FORWARD`, `@CLIPBOARD`, `@DEAD:<name>`, `@COMPLETE_1`/`_2`/`_3`, `@tr_voice/<src>-<dst>` (e.g. `@tr_voice/ru-en` for voice translation), `sound*`, `vib*`, and the style keys listed in `core/Constants.kt`.
+
+Popup slots accept negative decimal keycodes (`"-61"` sends Tab), combinations (`"shift+-61"` sends Shift+Tab), and the same special actions as hold/heavy press. Surrounding whitespace is ignored for actions and keycodes, and a Unicode minus (`−61`, as some keyboards type it) counts as `-`; a slot like `(key: "-61")` is also a keycode; ordinary text keeps its whitespace, and positive digits remain literal characters.
+
+A popup position can also be a settings node, using the same parentheses/array syntax as a main key:
+
+```
+("key": "a",
+    ("key": "Tab", "code": "-61"),
+    ("key": "⇤", "code": "-61", "meta": "1"),
+    ("text": "-61"),
+    ("key": "Copy", "combo": "ctrl+c")
+)
+```
+
+Supported popup settings:
+
+- `key`: display label (including `@string/...`). Without another action, sends its first Unicode character or runs a special action such as `@VOICE`.
+- `code`: negative Android keycode or positive Unicode code point; decimal and `0x` hex are accepted.
+- `text`: commits literal text, so `"-61"`, `"ctrl+c"`, and `"@VOICE"` are typed rather than executed. Single characters retain their exact case.
+- `meta`: numeric Android modifier mask, added to currently active modifiers for this action only (`1` = Shift, `0x1000` = Ctrl, `2` = Alt). Use `combo` for readable combinations.
+- `combo`, `macro`, `layout`: work like the corresponding main-key settings.
+- `textCurOffset`: moves the cursor after literal text, using the main-key convention: a nonnegative offset counts from the start, a negative offset from the end. The offset must be within the text length.
+
+If multiple actions are present, precedence is `macro`, `combo`, `layout`, `text`, `code`, then `key`. Popup actions do not inherit the main key's action settings. Nested popup positions and other main-key settings are rejected by validation. Existing string slots retain their behavior.
+
+In the layout editor, tap a popup position and choose **Action**, **Key code** (type `-61`, `61` or `tab`, or pick from the list; always stored as `(code: "-61")`), **Literal text** (typed exactly, so `-61` inserts those characters), or **Key settings**. Key settings retain the full node when reopened and show an error instead of saving invalid input.

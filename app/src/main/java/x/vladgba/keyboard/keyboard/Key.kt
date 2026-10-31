@@ -295,10 +295,8 @@ class Key(private val c: Keyboard, var row: Row, var x: Int, var y: Int, opts: F
      * Negative numbers are key codes (like `code`), `"ctrl+c"` is a key combination,
      * `"macro:name"` runs a macro, anything else is text.
      */
-    private fun emit(value: String) {
-        val n = if (value.startsWith("-")) value.toIntOrNull() else null
-        if (n != null) c.onKey(n) else if (!c.runSpecial(value)) c.onText(value)
-    }
+    private fun emit(value: String, singleCharacterAsKey: Boolean = false) =
+        KeyValue.dispatch(value, c::onKey, c::onText, c::runSpecial, singleCharacterAsKey)
 
     private fun modifierMapping(): Boolean {
         if (!Settings.bool(SETTING_MODIFIER_MAPPINGS, false)) return false
@@ -521,13 +519,26 @@ class Key(private val c: Keyboard, var row: Row, var x: Int, var y: Int, opts: F
 
     private fun prExtChars(node: FlexNode = this): Boolean {
         if (node.childCount() == 0 || charPos < 1) return false
-        val s = node.str(charPos - 1)
-        if (s.isEmpty()) return true
-        if (c.runSpecial(s)) return true
-        if (s.length > 1 && s.startsWith("-")) s.toIntOrNull()?.let { c.onKey(it); return true }
-        if (s.codePointCount(0, s.length) > 1) c.onText(s)
-        else c.onKey(s.codePointAt(0))
+        dispatchPopup(node.childs.getOrNull(charPos - 1))
         return true
+    }
+
+    private fun dispatchPopup(slot: Any?) {
+        val popup = PopupAction.from(slot) ?: return
+        fun dispatch() = popup.dispatch(c::onKey, c::onText, c::runSpecial,
+            sendCombo = { c.sendCombo(it, requireModifier = false) },
+            resolveLabel = { Labels.resolve(c.ctx, it) })
+        if (popup.meta == 0) {
+            dispatch()
+            return
+        }
+        val previous = c.metaState
+        try {
+            c.metaState = previous or popup.meta
+            dispatch()
+        } finally {
+            c.metaState = previous
+        }
     }
 
     // ======================= special actions =======================
@@ -566,8 +577,9 @@ class Key(private val c: Keyboard, var row: Row, var x: Int, var y: Int, opts: F
                 // Shift + swipe: store the selection into this slot
                 this[charPos - 1] = ic.getSelectedText(0)?.toString() ?: return true
             } else {
-                val s = str(charPos - 1)
-                if (s.isNotBlank()) c.onText(s)
+                val slot = childs.getOrNull(charPos - 1)
+                if (slot is FlexNode) dispatchPopup(slot)
+                else if (slot is String && slot.isNotBlank()) c.onText(slot)
             }
         } catch (e: Exception) {
             c.prStack(e)
@@ -780,7 +792,7 @@ class Key(private val c: Keyboard, var row: Row, var x: Int, var y: Int, opts: F
         val cy = y + height / 2f
 
         // Where each extra character sits (same order as the swipe directions).
-        val used = BooleanArray(8) { isClipboard || str(it).isNotBlank() }
+        val used = BooleanArray(8) { isClipboard || popupLabel(it, false).isNotBlank() }
         val bx = FloatArray(8) { cx + POPUP_DIR_X[it] * ring }
         val by = FloatArray(8) { cy + POPUP_DIR_Y[it] * ring }
 
@@ -814,7 +826,11 @@ class Key(private val c: Keyboard, var row: Row, var x: Int, var y: Int, opts: F
     private fun popupBubblePct(key: String) = num(key, 60).coerceIn(20, 150).toFloat()
 
     private fun popupLabel(pos: Int, sh: Boolean): String {
-        val raw = str(pos)
+        val slot = childs.getOrNull(pos)
+        if (bool(KEY_CLIPBOARD) && slot is String) return slot
+        val action = PopupAction.from(slot) ?: return ""
+        val raw = action.label(Combos::keyLabel) { Labels.resolve(c.ctx, it) }
+        if (action.type == PopupAction.Type.TEXT) return raw
         if (raw.isBlank()) return ""
         val s = when {
             raw == VOICE_ACTION -> "🎤"
@@ -828,7 +844,7 @@ class Key(private val c: Keyboard, var row: Row, var x: Int, var y: Int, opts: F
             raw.startsWith(COMPLETE_ACTION_PREFIX) -> "✓" + raw.removePrefix(COMPLETE_ACTION_PREFIX)
             else -> raw
         }
-        return if (s.length == 1) c.getShifted(s[0].code, sh).toChar().toString() else s
+        return if (s.length == 1) c.getShifted(s[0].code, sh || action.meta and KeyEvent.META_SHIFT_ON != 0).toChar().toString() else s
     }
 
     /** One popup bubble; the selected one is a little larger and tinted. */
@@ -884,23 +900,8 @@ class Key(private val c: Keyboard, var row: Row, var x: Int, var y: Int, opts: F
     }
 
     private fun drawChar(pos: Int, ox: Float, oy: Float, canvas: Canvas, paint: Paint, sh: Boolean) {
-        val raw = str(pos)
-        if (raw.isBlank()) return
-        val s = when {
-            raw == VOICE_ACTION -> "🎤"
-            raw.startsWith(TR_VOICE_PREFIX) || raw.startsWith(TR_VOICE_ALT_PREFIX) -> "🎤🌐"
-            raw == COMPOSE_ACTION -> "⎄"
-            raw == DELETE_WORD_ACTION -> "⌫⌫"
-            raw == DELETE_WORD_FORWARD_ACTION -> "⌦⌦"
-            raw == CLIPBOARD_ACTION -> "📋"
-            DeadKeys.isDeadKey(raw) -> DeadKeys.symbol(DeadKeys.nameOf(raw))
-            raw == COMPLETE_EMOJI_ACTION -> "✓🙂"
-            raw.startsWith(COMPLETE_ACTION_PREFIX) -> "✓" + raw.removePrefix(COMPLETE_ACTION_PREFIX)
-            else -> raw
-        }
-        // Bug fix: shifted popup chars were computed but never drawn.
-        val shown = if (s.length == 1) c.getShifted(s[0].code, sh).toChar().toString() else s
-        canvas.drawText(shown, ox, oy + (paint.textSize - paint.descent()) / 2, paint)
+        val shown = popupLabel(pos, sh)
+        if (shown.isNotEmpty()) canvas.drawText(shown, ox, oy + (paint.textSize - paint.descent()) / 2, paint)
     }
 
     private fun shiftedLabel(): String {

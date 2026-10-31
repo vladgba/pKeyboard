@@ -139,11 +139,13 @@ open class FlexNode(var parent: FlexNode? = null) {
 
         fun escape(data: String, sb: StringBuilder = StringBuilder()): StringBuilder {
             sb.append('"')
-            for (c in data) {
+            for ((i, c) in data.withIndex()) {
                 val e = FlexParser.ESCAPE[c]
                 when {
                     e != null -> sb.append(e)
-                    c < ' ' || c.code > 0x7f -> sb.append("\\u").append(Integer.toHexString(c.code).padStart(4, '0'))
+                    // The parser reads up to 6 hex digits, so "−61" needs "12, not − + "61".
+                    c < ' ' || c.code > 0x7f -> sb.append("\\u").append(Integer.toHexString(c.code)
+                        .padStart(if (data.getOrNull(i + 1)?.let { it.isDigit() || it in 'a'..'f' || it in 'A'..'F' } == true) 6 else 4, '0'))
                     else -> sb.append(c)
                 }
             }

@@ -235,9 +235,9 @@ fun main(args: Array<String>) {
         val words = listOf("aliasfixture", "compactfixture", "тестдума")
         finish(CompactFixture.Dictionary(trie(words), listOf(0, 12, 9), listOf(0 to 1)))
     }
-    File(folder, "vkeyboard-check.cdict").writeBytes(fixture)
-    File(folder, "vkeyboard-broken.cdict").writeBytes(fixture.copyOf(fixture.size / 2))
-    ZipOutputStream(File(folder, "vkeyboard-compact.zip").outputStream()).use {
+    File(folder, "pkeyboard-check.cdict").writeBytes(fixture)
+    File(folder, "pkeyboard-broken.cdict").writeBytes(fixture.copyOf(fixture.size / 2))
+    ZipOutputStream(File(folder, "pkeyboard-compact.zip").outputStream()).use {
         it.putNextEntry(ZipEntry("main.cdict")); it.write(fixture); it.closeEntry()
     }
 }

@@ -3,12 +3,12 @@
 
     <item
             android:id="@+id/action_prebuilt_add_theme"
-            android:icon="@android:drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_prebuilt_themes"
             android:title="@string/prebuilt_themes"
             android:showAsAction="ifRoom" />
     <item
             android:id="@+id/action_prebuilt_add_layouts"
-            android:icon="@android:drawable/ic_menu_add"
+            android:icon="@drawable/ic_prebuilt_layouts"
             android:title="@string/prebuilt_layouts"
             android:showAsAction="ifRoom" />
     <item

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Keyboard: outlined body, two key rows and a spacebar -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24"
+        android:tint="?android:attr/colorControlNormal">
+    <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="1.8"
+            android:strokeLineJoin="round"
+            android:pathData="M4.5,5.5h15a2,2 0 0 1 2,2v9a2,2 0 0 1 -2,2h-15a2,2 0 0 1 -2,-2v-9a2,2 0 0 1 2,-2z" />
+    <path
+            android:fillColor="#FF000000"
+            android:pathData="M5.05,8.2h1.9v1.9h-1.9zM8.05,8.2h1.9v1.9h-1.9zM11.05,8.2h1.9v1.9h-1.9zM14.05,8.2h1.9v1.9h-1.9zM17.05,8.2h1.9v1.9h-1.9zM6.55,11.3h1.9v1.9h-1.9zM9.55,11.3h1.9v1.9h-1.9zM12.55,11.3h1.9v1.9h-1.9zM15.55,11.3h1.9v1.9h-1.9zM8,14.5h8a0.75,0.75 0 0 1 0,1.5h-8a0.75,0.75 0 0 1 0,-1.5z" />
+</vector>

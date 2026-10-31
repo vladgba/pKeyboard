@@ -1,5 +1,9 @@
 package x.vladgba.keyboard.ui
 
+import x.vladgba.keyboard.pui.PAboutInfo
+import x.vladgba.keyboard.pui.PAboutLabels
+import x.vladgba.keyboard.pui.showPAbout
+
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
@@ -141,11 +145,16 @@ class MainActivity : LocalizedActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_about -> {
-            Dialog(this).apply {
-                requestWindowFeature(Window.FEATURE_NO_TITLE)
-                setContentView(R.layout.about_app)
-                show()
-            }
+            showPAbout(PAboutInfo(
+                repo = "pKeyboard",
+                privacyUrl = "http://zcxv.icu/vkeyb/privacy.html",
+                termsUrl = "http://zcxv.icu/vkeyb/terms.html",
+                labels = PAboutLabels(
+                    github = getString(R.string.about_github),
+                    privacy = getString(R.string.about_privacy),
+                    terms = getString(R.string.about_terms),
+                ),
+            ))
             true
         }
         R.id.action_prebuilt_add_theme -> {
@@ -164,10 +173,4 @@ class MainActivity : LocalizedActivity() {
     } catch (_: Exception) {
     }
 
-    // Referenced from about_app.xml via android:onClick
-    fun openMail(v: View) = openUrl("mailto:vladgba@gmail.com")
-    fun openWiki(v: View) = openUrl("https://github.com/vladgba/pKeyboard/wiki")
-    fun openGithub(v: View) = openUrl("https://github.com/vladgba/pKeyboard")
-    fun openPrivacyPolicy(v: View) = openUrl("http://zcxv.icu/vkeyb/privacy.html")
-    fun openTermsOfUse(v: View) = openUrl("http://zcxv.icu/vkeyb/terms.html")
 }

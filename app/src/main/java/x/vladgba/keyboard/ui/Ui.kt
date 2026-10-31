@@ -1,5 +1,7 @@
 package x.vladgba.keyboard.ui
 
+import x.vladgba.keyboard.pui.pColor
+
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -33,14 +35,14 @@ internal object UiPalette {
     var line = 0xffe2e2e8.toInt(); private set
 
     fun load(ctx: Context) {
-        accent = ctx.getColor(x.vladgba.keyboard.R.color.p_accent_text)
-        text = ctx.getColor(x.vladgba.keyboard.R.color.p_text)
-        secondary = ctx.getColor(x.vladgba.keyboard.R.color.p_text2)
-        ok = ctx.getColor(x.vladgba.keyboard.R.color.p_success)
-        warn = ctx.getColor(x.vladgba.keyboard.R.color.p_danger)
-        card = ctx.getColor(x.vladgba.keyboard.R.color.p_surface)
-        surface2 = ctx.getColor(x.vladgba.keyboard.R.color.p_surface2)
-        line = ctx.getColor(x.vladgba.keyboard.R.color.p_line)
+        accent = ctx.pColor(x.vladgba.keyboard.R.color.p_accent_text)
+        text = ctx.pColor(x.vladgba.keyboard.R.color.p_text)
+        secondary = ctx.pColor(x.vladgba.keyboard.R.color.p_text2)
+        ok = ctx.pColor(x.vladgba.keyboard.R.color.p_success)
+        warn = ctx.pColor(x.vladgba.keyboard.R.color.p_danger)
+        card = ctx.pColor(x.vladgba.keyboard.R.color.p_surface)
+        surface2 = ctx.pColor(x.vladgba.keyboard.R.color.p_surface2)
+        line = ctx.pColor(x.vladgba.keyboard.R.color.p_line)
     }
 }
 

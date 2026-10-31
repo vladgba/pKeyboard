@@ -20,7 +20,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:label="@string/app_name"
             android:localeConfig="@xml/locales_config"
-            android:theme="@android:style/Theme.Material.Light">
+            android:theme="@style/Theme.P.Bar">
 
         <activity
                 android:name=".ui.MainActivity"

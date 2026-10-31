@@ -1,4 +1,4 @@
-# VKeyboard
+# pKeyboard
 
 A customizable, lightweight virtual keyboard for Android. It has **zero library dependencies** and uses only the Android framework and the Kotlin stdlib.
 

@@ -12,10 +12,10 @@
     <string name="ui_restored_default">Valoarea implicită a fost restabilită</string>
     <string name="ui_home_tagline">O tastatură ușoară pe care o poți adapta: aranjamente, teme, gesturi, combinații de taste și macrocomenzi.</string>
     <string name="ui_home_setup">Primii pași</string>
-    <string name="ui_step1">1. Activează VKeyboard</string>
-    <string name="ui_step1_sub">Se deschid setările sistemului. Pornește VKeyboard acolo.</string>
+    <string name="ui_step1">1. Activează pKeyboard</string>
+    <string name="ui_step1_sub">Se deschid setările sistemului. Pornește pKeyboard acolo.</string>
     <string name="ui_step2">2. Fă-o tastatura ta</string>
-    <string name="ui_step2_sub">Alege VKeyboard din lista de tastaturi.</string>
+    <string name="ui_step2_sub">Alege pKeyboard din lista de tastaturi.</string>
     <string name="ui_step3">3. Încearc-o aici:</string>
     <string name="ui_home_customize">Personalizare</string>
     <string name="ui_home_settings_sub">Comportament, dimensiuni, durata atingerilor, vibrații</string>
@@ -147,7 +147,7 @@
     <string name="words_import_none">Niciun cuvânt găsit în acest fișier (citite %2$d)</string>
     <string name="words_system_empty">Dicționarul personal Android este gol</string>
     <string name="words_exported_system">Au fost adăugate %1$d cuvinte în dicționarul personal Android</string>
-    <string name="words_system_denied">Android nu a permis accesul la dicționarul personal. Setează VKeyboard ca tastatură curentă și încearcă din nou.</string>
+    <string name="words_system_denied">Android nu a permis accesul la dicționarul personal. Setează pKeyboard ca tastatură curentă și încearcă din nou.</string>
     <string name="words_failed">Eșec: %1$s</string>
     <string name="words_working">Se procesează…</string>
     <string name="ui_set_split_gap">Spațiu de divizare</string>
@@ -254,7 +254,7 @@
     <string name="ui_tester_copy">Copiază codul</string>
     <string name="ui_tester_capture_back">Preia și butonul Înapoi</string>
     <string name="ui_tester_capture_back_sub">Când e activat, ieși din ecran cu săgeata de sus</string>
-    <string name="ui_tester_remap_note">Reasignările funcționează cât scrii cu VKeyboard. Un aranjament poate avea și reasignări proprii, care au prioritate.</string>
+    <string name="ui_tester_remap_note">Reasignările funcționează cât scrii cu pKeyboard. Un aranjament poate avea și reasignări proprii, care au prioritate.</string>
     <string name="ui_tester_log">Jurnal de evenimente</string>
     <string name="ui_remap_hidden">Și când tastatura e ascunsă</string>
     <string name="ui_remap_hidden_too">și când e ascunsă</string>
@@ -386,7 +386,7 @@
     <string name="dict_err_text">Introdu textul de inserat</string>
     <string name="dict_err_exists">Această abreviere există deja</string>
     <string name="pk_title">Butoane fizice</string>
-    <string name="pk_intro">Fă ca butoanele fizice să facă altceva în timp ce scrii cu VKeyboard. De exemplu: Volum jos mută cursorul, un buton al telecomenzii scrie adresa ta de e-mail sau o tastă a tastaturii schimbă limba.</string>
+    <string name="pk_intro">Fă ca butoanele fizice să facă altceva în timp ce scrii cu pKeyboard. De exemplu: Volum jos mută cursorul, un buton al telecomenzii scrie adresa ta de e-mail sau o tastă a tastaturii schimbă limba.</string>
     <string name="pk_enabled">Folosește modificările mele</string>
     <string name="pk_enabled_sub">Oprește ca toate butoanele să funcționeze din nou normal, fără să-ți ștergi modificările</string>
     <string name="pk_step1">1. Apasă butonul pe care vrei să-l schimbi</string>
@@ -417,7 +417,7 @@
     <string name="pk_opt_block_sub">Ignoră acest buton în timp ce scriu (de ex. împotriva apăsărilor accidentale)</string>
     <string name="pk_opt_restore">…să funcționeze din nou normal</string>
     <string name="pk_opt_restore_sub">Elimină modificarea mea pentru acest buton</string>
-    <string name="pk_hidden_note">Fără aceasta, modificarea funcționează doar cât tastele VKeyboard sunt pe ecran. În ambele cazuri trebuie să fie activ un câmp de text.</string>
+    <string name="pk_hidden_note">Fără aceasta, modificarea funcționează doar cât tastele pKeyboard sunt pe ecran. În ambele cazuri trebuie să fie activ un câmp de text.</string>
     <string name="pk_switches_to">comută la %1$s</string>
     <string name="pk_does_nothing">nu face nimic</string>
     <string name="ts_title">Hartă a atingerilor</string>
@@ -439,7 +439,7 @@
     <string name="ts_legend_heat">Petele colorate arată unde atingi tastatura. Albastru = rar, roșu = cel mai des.</string>
     <string name="ts_legend_aim">Linie de la centrul tastei la atingerea medie. Verde = în țintă, portocaliu = puțin alături, roșu = des alături.</string>
     <string name="ts_try">Încearcă live</string>
-    <string name="ts_try_hint">Scrie aici cu VKeyboard…</string>
+    <string name="ts_try_hint">Scrie aici cu pKeyboard…</string>
     <string name="ts_try_sub">Ultimele atingeri apar pe previzualizare ca puncte (cel roșu e cel mai nou). Se păstrează doar cât acest ecran e deschis.</string>
     <string name="ts_insights">Ce arată</string>
     <string name="ts_insights_none">Încă nimic.</string>
@@ -563,7 +563,7 @@
     <string name="vo_err_generic">Dictarea vocală a eșuat. Încearcă din nou.</string>
     <string name="vo_perm_granted">Microfon permis. Atinge din nou 🎤 ca să vorbești.</string>
     <string name="vo_perm_denied">Dictarea vocală are nevoie de microfon.</string>
-    <string name="vo_perm_settings">Permite microfonul pentru VKeyboard la Permisiuni, apoi atinge din nou 🎤.</string>
+    <string name="vo_perm_settings">Permite microfonul pentru pKeyboard la Permisiuni, apoi atinge din nou 🎤.</string>
     <string name="ui_btn_voice">🎤 Voce</string>
     <string name="ui_tap_opt_voice">Pornește dictarea vocală</string>
     <string name="ui_tap_voice">Atingere: dictare vocală</string>

@@ -2,7 +2,7 @@
 <resources>
     <string name="settings">Налаштування</string>
     <string name="you_can_test">Тут ви можете перевірити клавіатуру</string>
-    <string name="welcome_to_keyb">Ласкаво просимо до VKeyboard!</string>
+    <string name="welcome_to_keyb">Ласкаво просимо до pKeyboard!</string>
     <string name="heavy_press">Сильний дотик</string>
     <string name="long_press">Довгий дотик</string>
     <string name="save">Зберегти</string>

@@ -82,10 +82,10 @@
     <!-- Home -->
     <string name="ui_home_tagline">A light keyboard you can shape to your needs: layouts, themes, gestures, shortcuts and macros.</string>
     <string name="ui_home_setup">Get started</string>
-    <string name="ui_step1">1. Turn on VKeyboard</string>
-    <string name="ui_step1_sub">Opens system settings. Switch VKeyboard on there.</string>
+    <string name="ui_step1">1. Turn on pKeyboard</string>
+    <string name="ui_step1_sub">Opens system settings. Switch pKeyboard on there.</string>
     <string name="ui_step2">2. Make it your keyboard</string>
-    <string name="ui_step2_sub">Pick VKeyboard in the list of keyboards.</string>
+    <string name="ui_step2_sub">Pick pKeyboard in the list of keyboards.</string>
     <string name="ui_step3">3. Try it here:</string>
     <string name="ui_home_customize">Customize</string>
     <string name="ui_home_settings_sub">Behavior, sizes, touch timing, vibration</string>
@@ -223,7 +223,7 @@
     <string name="words_import_none">No words found in this file (read %2$d)</string>
     <string name="words_system_empty">Android\'s personal dictionary is empty</string>
     <string name="words_exported_system">Added %1$d words to Android\'s personal dictionary</string>
-    <string name="words_system_denied">Android didn\'t allow access to the personal dictionary. Make VKeyboard your current keyboard and try again.</string>
+    <string name="words_system_denied">Android didn\'t allow access to the personal dictionary. Make pKeyboard your current keyboard and try again.</string>
     <string name="words_failed">Failed: %1$s</string>
     <string name="words_working">Working…</string>
     <string name="ui_set_split_gap">Split gap</string>
@@ -338,7 +338,7 @@
     <string name="ui_tester_copy">Copy code</string>
     <string name="ui_tester_capture_back">Capture the Back key too</string>
     <string name="ui_tester_capture_back_sub">When on, leave this screen with the arrow at the top</string>
-    <string name="ui_tester_remap_note">Remaps work while you type with VKeyboard. A layout can also define its own remaps, which take priority.</string>
+    <string name="ui_tester_remap_note">Remaps work while you type with pKeyboard. A layout can also define its own remaps, which take priority.</string>
     <string name="ui_tester_log">Event log</string>
     <string name="ui_remap_hidden">Also when the keyboard is hidden</string>
     <string name="ui_remap_hidden_too">also when hidden</string>
@@ -486,7 +486,7 @@
 
     <!-- Physical buttons (remapping) -->
     <string name="pk_title">Physical buttons</string>
-    <string name="pk_intro">Make physical buttons do something else while you type with VKeyboard. For example: Volume Down moves the cursor, a remote button types your e-mail, or a keyboard key switches language.</string>
+    <string name="pk_intro">Make physical buttons do something else while you type with pKeyboard. For example: Volume Down moves the cursor, a remote button types your e-mail, or a keyboard key switches language.</string>
     <string name="pk_enabled">Use my button changes</string>
     <string name="pk_enabled_sub">Turn off to make all buttons work normally again without deleting your changes</string>
     <string name="pk_step1">1. Press the button you want to change</string>
@@ -517,7 +517,7 @@
     <string name="pk_opt_block_sub">Ignore this button while typing (e.g. stop accidental presses)</string>
     <string name="pk_opt_restore">…work normally again</string>
     <string name="pk_opt_restore_sub">Remove my change for this button</string>
-    <string name="pk_hidden_note">Without this, the change works only while the VKeyboard keys are on screen. A text field must be active either way.</string>
+    <string name="pk_hidden_note">Without this, the change works only while the pKeyboard keys are on screen. A text field must be active either way.</string>
     <string name="pk_switches_to">switches to %1$s</string>
     <string name="pk_does_nothing">does nothing</string>
 
@@ -541,7 +541,7 @@
     <string name="ts_legend_heat">Colored spots show where on the keyboard you touch. Blue = rarely, red = most.</string>
     <string name="ts_legend_aim">Line from the key center to your average touch. Green = on target, orange = a bit off, red = often off.</string>
     <string name="ts_try">Try it live</string>
-    <string name="ts_try_hint">Type here with VKeyboard…</string>
+    <string name="ts_try_hint">Type here with pKeyboard…</string>
     <string name="ts_try_sub">Your latest touches appear on the preview as dots (the red one is the newest). They are only kept while this screen is open.</string>
     <string name="ts_insights">What it shows</string>
     <string name="ts_insights_none">Nothing yet.</string>
@@ -674,7 +674,7 @@
     <string name="vo_err_generic">Voice typing failed. Try again.</string>
     <string name="vo_perm_granted">Microphone allowed. Tap 🎤 again to speak.</string>
     <string name="vo_perm_denied">Voice typing needs the microphone.</string>
-    <string name="vo_perm_settings">Allow the microphone for VKeyboard in Permissions, then tap 🎤 again.</string>
+    <string name="vo_perm_settings">Allow the microphone for pKeyboard in Permissions, then tap 🎤 again.</string>
     <string name="vo_translating">Translating…</string>
     <string name="vo_err_translate">Translation failed</string>
     <string name="vo_tr_action">Voice translation</string>

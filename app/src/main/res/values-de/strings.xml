@@ -2,7 +2,7 @@
 <resources>
     <string name="settings">Einstellungen</string>
     <string name="you_can_test">Sie können Tastatur hier testen</string>
-    <string name="welcome_to_keyb">Willkommen bei VKeyboard!</string>
+    <string name="welcome_to_keyb">Willkommen bei pKeyboard!</string>
     <string name="heavy_press">Starker Druck</string>
     <string name="long_press">Lange drücken</string>
     <string name="save">Speichern</string>

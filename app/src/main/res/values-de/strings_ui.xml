@@ -12,10 +12,10 @@
     <string name="ui_restored_default">Standardwert wiederhergestellt</string>
     <string name="ui_home_tagline">Eine leichte Tastatur, die du anpassen kannst: Layouts, Designs, Gesten, Tastenkürzel und Makros.</string>
     <string name="ui_home_setup">Erste Schritte</string>
-    <string name="ui_step1">1. VKeyboard aktivieren</string>
-    <string name="ui_step1_sub">Öffnet die Systemeinstellungen. Schalte VKeyboard dort ein.</string>
+    <string name="ui_step1">1. pKeyboard aktivieren</string>
+    <string name="ui_step1_sub">Öffnet die Systemeinstellungen. Schalte pKeyboard dort ein.</string>
     <string name="ui_step2">2. Als Tastatur auswählen</string>
-    <string name="ui_step2_sub">Wähle VKeyboard in der Liste der Tastaturen.</string>
+    <string name="ui_step2_sub">Wähle pKeyboard in der Liste der Tastaturen.</string>
     <string name="ui_step3">3. Hier ausprobieren:</string>
     <string name="ui_home_customize">Anpassen</string>
     <string name="ui_home_settings_sub">Verhalten, Größen, Berührungszeiten, Vibration</string>
@@ -147,7 +147,7 @@
     <string name="words_import_none">Keine Wörter in dieser Datei gefunden (%2$d gelesen)</string>
     <string name="words_system_empty">Das Android-Nutzerwörterbuch ist leer</string>
     <string name="words_exported_system">%1$d Wörter zum Android-Nutzerwörterbuch hinzugefügt</string>
-    <string name="words_system_denied">Android hat den Zugriff auf das Nutzerwörterbuch verweigert. Mache VKeyboard zur aktuellen Tastatur und versuche es erneut.</string>
+    <string name="words_system_denied">Android hat den Zugriff auf das Nutzerwörterbuch verweigert. Mache pKeyboard zur aktuellen Tastatur und versuche es erneut.</string>
     <string name="words_failed">Fehlgeschlagen: %1$s</string>
     <string name="words_working">Wird bearbeitet…</string>
     <string name="ui_set_split_gap">Abstand der Hälften</string>
@@ -254,7 +254,7 @@
     <string name="ui_tester_copy">Code kopieren</string>
     <string name="ui_tester_capture_back">Auch die Zurück-Taste abfangen</string>
     <string name="ui_tester_capture_back_sub">Wenn aktiv, verlässt du diesen Bildschirm über den Pfeil oben</string>
-    <string name="ui_tester_remap_note">Belegungen gelten, während du mit VKeyboard tippst. Ein Layout kann eigene Belegungen haben, die Vorrang haben.</string>
+    <string name="ui_tester_remap_note">Belegungen gelten, während du mit pKeyboard tippst. Ein Layout kann eigene Belegungen haben, die Vorrang haben.</string>
     <string name="ui_tester_log">Ereignisprotokoll</string>
     <string name="ui_remap_hidden">Auch wenn die Tastatur ausgeblendet ist</string>
     <string name="ui_remap_hidden_too">auch ausgeblendet</string>
@@ -386,7 +386,7 @@
     <string name="dict_err_text">Gib den einzufügenden Text ein</string>
     <string name="dict_err_exists">Diese Abkürzung gibt es bereits</string>
     <string name="pk_title">Physische Tasten</string>
-    <string name="pk_intro">Lass physische Tasten etwas anderes tun, während du mit VKeyboard schreibst. Zum Beispiel: Leiser bewegt den Cursor, eine Fernbedienungstaste schreibt deine E-Mail-Adresse oder eine Tastaturtaste wechselt die Sprache.</string>
+    <string name="pk_intro">Lass physische Tasten etwas anderes tun, während du mit pKeyboard schreibst. Zum Beispiel: Leiser bewegt den Cursor, eine Fernbedienungstaste schreibt deine E-Mail-Adresse oder eine Tastaturtaste wechselt die Sprache.</string>
     <string name="pk_enabled">Meine Tastenänderungen verwenden</string>
     <string name="pk_enabled_sub">Ausschalten, damit alle Tasten wieder normal funktionieren, ohne deine Änderungen zu löschen</string>
     <string name="pk_step1">1. Drücke die Taste, die du ändern möchtest</string>
@@ -417,7 +417,7 @@
     <string name="pk_opt_block_sub">Diese Taste beim Tippen ignorieren (z. B. gegen versehentliches Drücken)</string>
     <string name="pk_opt_restore">…wieder normal funktionieren</string>
     <string name="pk_opt_restore_sub">Meine Änderung für diese Taste entfernen</string>
-    <string name="pk_hidden_note">Ohne diese Option wirkt die Änderung nur, solange die VKeyboard-Tasten sichtbar sind. In jedem Fall muss ein Textfeld aktiv sein.</string>
+    <string name="pk_hidden_note">Ohne diese Option wirkt die Änderung nur, solange die pKeyboard-Tasten sichtbar sind. In jedem Fall muss ein Textfeld aktiv sein.</string>
     <string name="pk_switches_to">wechselt zu %1$s</string>
     <string name="pk_does_nothing">tut nichts</string>
     <string name="ts_title">Berührungs-Heatmap</string>
@@ -439,7 +439,7 @@
     <string name="ts_legend_heat">Farbige Flecken zeigen, wo du die Tastatur berührst. Blau = selten, Rot = am häufigsten.</string>
     <string name="ts_legend_aim">Linie von der Tastenmitte zu deiner durchschnittlichen Berührung. Grün = getroffen, Orange = etwas daneben, Rot = oft daneben.</string>
     <string name="ts_try">Live ausprobieren</string>
-    <string name="ts_try_hint">Hier mit VKeyboard tippen…</string>
+    <string name="ts_try_hint">Hier mit pKeyboard tippen…</string>
     <string name="ts_try_sub">Deine letzten Berührungen erscheinen als Punkte in der Vorschau (der rote ist der neueste). Sie bleiben nur, solange dieser Bildschirm offen ist.</string>
     <string name="ts_insights">Was es zeigt</string>
     <string name="ts_insights_none">Noch nichts.</string>
@@ -563,7 +563,7 @@
     <string name="vo_err_generic">Die Spracheingabe ist fehlgeschlagen. Versuche es noch einmal.</string>
     <string name="vo_perm_granted">Mikrofon erlaubt. Tippe noch einmal auf 🎤, um zu sprechen.</string>
     <string name="vo_perm_denied">Die Spracheingabe braucht das Mikrofon.</string>
-    <string name="vo_perm_settings">Erlaube VKeyboard das Mikrofon unter „Berechtigungen“ und tippe dann noch einmal auf 🎤.</string>
+    <string name="vo_perm_settings">Erlaube pKeyboard das Mikrofon unter „Berechtigungen“ und tippe dann noch einmal auf 🎤.</string>
     <string name="ui_btn_voice">🎤 Sprache</string>
     <string name="ui_tap_opt_voice">Spracheingabe starten</string>
     <string name="ui_tap_voice">Tippen: Spracheingabe</string>

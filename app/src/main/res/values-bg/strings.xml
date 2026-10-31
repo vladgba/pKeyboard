@@ -2,7 +2,7 @@
 <resources>
     <string name="settings">Настройки</string>
     <string name="you_can_test">Тук можете да тествате клавиатура</string>
-    <string name="welcome_to_keyb">Добре дошли във VKeyboard!</string>
+    <string name="welcome_to_keyb">Добре дошли във pKeyboard!</string>
     <string name="heavy_press">Силно налягане</string>
     <string name="long_press">Продължително натискане</string>
     <string name="save">Запази</string>

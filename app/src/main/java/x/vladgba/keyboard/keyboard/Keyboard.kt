@@ -881,7 +881,7 @@ class Keyboard(val ctx: Context, val ime: KeybWrapper?, private val connectionOv
                     }
                 }
             } catch (e: Exception) {
-                Log.w("VKeyboard", "Word suggestions unavailable", e)
+                Log.w("pKeyboard", "Word suggestions unavailable", e)
             }
         }
     }
@@ -1479,7 +1479,7 @@ class Keyboard(val ctx: Context, val ime: KeybWrapper?, private val connectionOv
     }
 
     companion object {
-        private const val TAG = "VKeyboard"
+        private const val TAG = "pKeyboard"
         private const val DEFAULT_COLOR = 0xffff00ff.toInt()
     }
 }

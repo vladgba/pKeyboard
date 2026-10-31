@@ -2,7 +2,7 @@
 <resources>
     <string name="settings">Setări</string>
     <string name="you_can_test">Poți testa tastatura aici</string>
-    <string name="welcome_to_keyb">Bine ai venit la VKeyboard!</string>
+    <string name="welcome_to_keyb">Bine ai venit la pKeyboard!</string>
     <string name="heavy_press">Atingere puternică</string>
     <string name="long_press">Apasare prelungită</string>
     <string name="save">Salvați</string>

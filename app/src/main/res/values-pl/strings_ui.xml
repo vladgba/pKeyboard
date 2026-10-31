@@ -12,10 +12,10 @@
     <string name="ui_restored_default">Przywrócono wartość domyślną</string>
     <string name="ui_home_tagline">Lekka klawiatura, którą dopasujesz do siebie: układy, motywy, gesty, skróty i makra.</string>
     <string name="ui_home_setup">Pierwsze kroki</string>
-    <string name="ui_step1">1. Włącz VKeyboard</string>
-    <string name="ui_step1_sub">Otworzą się ustawienia systemu. Włącz tam VKeyboard.</string>
+    <string name="ui_step1">1. Włącz pKeyboard</string>
+    <string name="ui_step1_sub">Otworzą się ustawienia systemu. Włącz tam pKeyboard.</string>
     <string name="ui_step2">2. Ustaw jako klawiaturę</string>
-    <string name="ui_step2_sub">Wybierz VKeyboard z listy klawiatur.</string>
+    <string name="ui_step2_sub">Wybierz pKeyboard z listy klawiatur.</string>
     <string name="ui_step3">3. Wypróbuj tutaj:</string>
     <string name="ui_home_customize">Dostosuj</string>
     <string name="ui_home_settings_sub">Działanie, rozmiary, czas dotyku, wibracje</string>
@@ -147,7 +147,7 @@
     <string name="words_import_none">Nie znaleziono słów w tym pliku (odczytano %2$d)</string>
     <string name="words_system_empty">Słownik osobisty Androida jest pusty</string>
     <string name="words_exported_system">Dodano %1$d słów do słownika osobistego Androida</string>
-    <string name="words_system_denied">Android nie zezwolił na dostęp do słownika osobistego. Ustaw VKeyboard jako bieżącą klawiaturę i spróbuj ponownie.</string>
+    <string name="words_system_denied">Android nie zezwolił na dostęp do słownika osobistego. Ustaw pKeyboard jako bieżącą klawiaturę i spróbuj ponownie.</string>
     <string name="words_failed">Błąd: %1$s</string>
     <string name="words_working">Przetwarzanie…</string>
     <string name="ui_set_split_gap">Przerwa podziału</string>
@@ -254,7 +254,7 @@
     <string name="ui_tester_copy">Kopiuj kod</string>
     <string name="ui_tester_capture_back">Przechwytuj także przycisk Wstecz</string>
     <string name="ui_tester_capture_back_sub">Gdy włączone, opuść ten ekran strzałką u góry</string>
-    <string name="ui_tester_remap_note">Przypisania działają podczas pisania na VKeyboard. Układ może też mieć własne przypisania, które mają pierwszeństwo.</string>
+    <string name="ui_tester_remap_note">Przypisania działają podczas pisania na pKeyboard. Układ może też mieć własne przypisania, które mają pierwszeństwo.</string>
     <string name="ui_tester_log">Dziennik zdarzeń</string>
     <string name="ui_remap_hidden">Także gdy klawiatura jest ukryta</string>
     <string name="ui_remap_hidden_too">także gdy ukryta</string>
@@ -386,7 +386,7 @@
     <string name="dict_err_text">Wpisz tekst do wstawienia</string>
     <string name="dict_err_exists">Taki skrót już istnieje</string>
     <string name="pk_title">Przyciski fizyczne</string>
-    <string name="pk_intro">Niech przyciski fizyczne robią coś innego, gdy piszesz na VKeyboard. Na przykład: Ciszej przesuwa kursor, przycisk pilota wpisuje Twój e-mail, a klawisz klawiatury zmienia język.</string>
+    <string name="pk_intro">Niech przyciski fizyczne robią coś innego, gdy piszesz na pKeyboard. Na przykład: Ciszej przesuwa kursor, przycisk pilota wpisuje Twój e-mail, a klawisz klawiatury zmienia język.</string>
     <string name="pk_enabled">Używaj moich zmian przycisków</string>
     <string name="pk_enabled_sub">Wyłącz, aby wszystkie przyciski znów działały zwyczajnie, bez usuwania zmian</string>
     <string name="pk_step1">1. Naciśnij przycisk, który chcesz zmienić</string>
@@ -417,7 +417,7 @@
     <string name="pk_opt_block_sub">Ignoruj ten przycisk podczas pisania (np. przeciw przypadkowym naciśnięciom)</string>
     <string name="pk_opt_restore">…działaj znów zwyczajnie</string>
     <string name="pk_opt_restore_sub">Usuń moją zmianę dla tego przycisku</string>
-    <string name="pk_hidden_note">Bez tego zmiana działa tylko wtedy, gdy klawisze VKeyboard są na ekranie. W obu przypadkach musi być aktywne pole tekstowe.</string>
+    <string name="pk_hidden_note">Bez tego zmiana działa tylko wtedy, gdy klawisze pKeyboard są na ekranie. W obu przypadkach musi być aktywne pole tekstowe.</string>
     <string name="pk_switches_to">przełącza na %1$s</string>
     <string name="pk_does_nothing">nic nie robi</string>
     <string name="ts_title">Mapa dotyku</string>
@@ -439,7 +439,7 @@
     <string name="ts_legend_heat">Kolorowe plamy pokazują, gdzie dotykasz klawiatury. Niebieski = rzadko, czerwony = najczęściej.</string>
     <string name="ts_legend_aim">Linia od środka klawisza do średniego dotknięcia. Zielony = celnie, pomarańczowy = trochę obok, czerwony = często obok.</string>
     <string name="ts_try">Sprawdź na żywo</string>
-    <string name="ts_try_hint">Pisz tutaj na VKeyboard…</string>
+    <string name="ts_try_hint">Pisz tutaj na pKeyboard…</string>
     <string name="ts_try_sub">Ostatnie dotknięcia pojawiają się na podglądzie jako kropki (czerwona jest najnowsza). Są przechowywane tylko, gdy ten ekran jest otwarty.</string>
     <string name="ts_insights">Co widać</string>
     <string name="ts_insights_none">Na razie nic.</string>
@@ -563,7 +563,7 @@
     <string name="vo_err_generic">Pisanie głosowe nie powiodło się. Spróbuj ponownie.</string>
     <string name="vo_perm_granted">Mikrofon dozwolony. Dotknij 🎤 ponownie, aby mówić.</string>
     <string name="vo_perm_denied">Pisanie głosowe wymaga mikrofonu.</string>
-    <string name="vo_perm_settings">Zezwól VKeyboard na mikrofon w sekcji Uprawnienia, a potem dotknij 🎤 ponownie.</string>
+    <string name="vo_perm_settings">Zezwól pKeyboard na mikrofon w sekcji Uprawnienia, a potem dotknij 🎤 ponownie.</string>
     <string name="ui_btn_voice">🎤 Głos</string>
     <string name="ui_tap_opt_voice">Uruchom pisanie głosowe</string>
     <string name="ui_tap_voice">Dotknięcie: pisanie głosowe</string>

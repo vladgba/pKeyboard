@@ -36,7 +36,7 @@ class BackupActivity : LocalizedActivity() {
         // Full backup
         page.header(getString(R.string.bk_sec_full))
         page.row(getString(R.string.bk_export_full), getString(R.string.bk_export_full_sub)) {
-            exportDoc("vkeyboard_backup_${timestamp()}.zip", "application/zip", REQ_EXPORT_FULL)
+            exportDoc("pKeyboard_backup_${timestamp()}.zip", "application/zip", REQ_EXPORT_FULL)
         }
         page.row(getString(R.string.bk_restore_full), getString(R.string.bk_restore_full_sub)) {
             importDoc(arrayOf("application/zip", "application/octet-stream", "*/*"), REQ_IMPORT_BACKUP)
@@ -51,10 +51,10 @@ class BackupActivity : LocalizedActivity() {
             importDoc(arrayOf("text/plain", "*/*"), REQ_IMPORT_SETTINGS)
         }
         page.row(getString(R.string.bk_export_config), getString(R.string.bk_export_config_sub)) {
-            exportDoc("vkeyboard_config_${timestamp()}.zip", "application/zip", REQ_EXPORT_CONFIG)
+            exportDoc("pKeyboard_config_${timestamp()}.zip", "application/zip", REQ_EXPORT_CONFIG)
         }
         page.row(getString(R.string.bk_export_layouts), getString(R.string.bk_export_layouts_sub)) {
-            exportDoc("vkeyboard_layouts_${timestamp()}.zip", "application/zip", REQ_EXPORT_LAYOUTS)
+            exportDoc("pKeyboard_layouts_${timestamp()}.zip", "application/zip", REQ_EXPORT_LAYOUTS)
         }
     }
 

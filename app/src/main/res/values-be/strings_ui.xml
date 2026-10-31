@@ -12,10 +12,10 @@
     <string name="ui_restored_default">Адноўлена значэнне па змаўчанні</string>
     <string name="ui_home_tagline">Лёгкая клавіятура, якую можна наладзіць пад сябе: раскладкі, тэмы, жэсты, спалучэнні клавіш і макрасы.</string>
     <string name="ui_home_setup">Пачатак працы</string>
-    <string name="ui_step1">1. Уключыце VKeyboard</string>
-    <string name="ui_step1_sub">Адкрыюцца сістэмныя налады. Уключыце там VKeyboard.</string>
+    <string name="ui_step1">1. Уключыце pKeyboard</string>
+    <string name="ui_step1_sub">Адкрыюцца сістэмныя налады. Уключыце там pKeyboard.</string>
     <string name="ui_step2">2. Зрабіце яе асноўнай</string>
-    <string name="ui_step2_sub">Выберыце VKeyboard у спісе клавіятур.</string>
+    <string name="ui_step2_sub">Выберыце pKeyboard у спісе клавіятур.</string>
     <string name="ui_step3">3. Паспрабуйце тут:</string>
     <string name="ui_home_customize">Налады</string>
     <string name="ui_home_settings_sub">Паводзіны, памеры, час дотыкаў, вібрацыя</string>
@@ -147,7 +147,7 @@
     <string name="words_import_none">У файле не знойдзена слоў (прачытана %2$d)</string>
     <string name="words_system_empty">Асабісты слоўнік Android пусты</string>
     <string name="words_exported_system">Дададзена %1$d слоў у асабісты слоўнік Android</string>
-    <string name="words_system_denied">Android не даў доступ да асабістага слоўніка. Зрабіце VKeyboard бягучай клавіятурай і паспрабуйце зноў.</string>
+    <string name="words_system_denied">Android не даў доступ да асабістага слоўніка. Зрабіце pKeyboard бягучай клавіятурай і паспрабуйце зноў.</string>
     <string name="words_failed">Памылка: %1$s</string>
     <string name="words_working">Апрацоўка…</string>
     <string name="ui_set_split_gap">Прамежак падзелу</string>
@@ -254,7 +254,7 @@
     <string name="ui_tester_copy">Капіяваць код</string>
     <string name="ui_tester_capture_back">Перахопліваць і кнопку «Назад»</string>
     <string name="ui_tester_capture_back_sub">Калі ўключана, выйсці з гэтага экрана можна стрэлкай уверсе</string>
-    <string name="ui_tester_remap_note">Прызначэнні дзейнічаюць, пакуль вы друкуеце на VKeyboard. Раскладка можа мець уласныя прызначэнні — яны важнейшыя.</string>
+    <string name="ui_tester_remap_note">Прызначэнні дзейнічаюць, пакуль вы друкуеце на pKeyboard. Раскладка можа мець уласныя прызначэнні — яны важнейшыя.</string>
     <string name="ui_tester_log">Журнал падзей</string>
     <string name="ui_remap_hidden">Таксама калі клавіятура схавана</string>
     <string name="ui_remap_hidden_too">таксама калі схавана</string>
@@ -386,7 +386,7 @@
     <string name="dict_err_text">Увядзіце тэкст для ўстаўкі</string>
     <string name="dict_err_exists">Такое скарачэнне ўжо ёсць</string>
     <string name="pk_title">Фізічныя кнопкі</string>
-    <string name="pk_intro">Хай фізічныя кнопкі робяць іншае, пакуль вы друкуеце на VKeyboard. Напрыклад: «Гучнасць уніз» рухае курсор, кнопка пульта друкуе ваш e-mail, а клавіша клавіятуры пераключае мову.</string>
+    <string name="pk_intro">Хай фізічныя кнопкі робяць іншае, пакуль вы друкуеце на pKeyboard. Напрыклад: «Гучнасць уніз» рухае курсор, кнопка пульта друкуе ваш e-mail, а клавіша клавіятуры пераключае мову.</string>
     <string name="pk_enabled">Ужываць мае змены кнопак</string>
     <string name="pk_enabled_sub">Выключыце, каб усе кнопкі зноў працавалі звычайна, не выдаляючы змен</string>
     <string name="pk_step1">1. Націсніце кнопку, якую хочаце змяніць</string>
@@ -417,7 +417,7 @@
     <string name="pk_opt_block_sub">Ігнараваць кнопку падчас набору (напр., ад выпадковых націсканняў)</string>
     <string name="pk_opt_restore">…зноў працаваць звычайна</string>
     <string name="pk_opt_restore_sub">Прыбраць маю змену для гэтай кнопкі</string>
-    <string name="pk_hidden_note">Без гэтага змена дзейнічае, толькі пакуль клавішы VKeyboard на экране. У любым выпадку павінна быць актыўным тэкставае поле.</string>
+    <string name="pk_hidden_note">Без гэтага змена дзейнічае, толькі пакуль клавішы pKeyboard на экране. У любым выпадку павінна быць актыўным тэкставае поле.</string>
     <string name="pk_switches_to">пераключае на %1$s</string>
     <string name="pk_does_nothing">нічога не робіць</string>
     <string name="ts_title">Карта дотыкаў</string>
@@ -439,7 +439,7 @@
     <string name="ts_legend_heat">Каляровыя плямы паказваюць, дзе вы дакранаецеся да клавіятуры. Сіні — рэдка, чырвоны — найчасцей.</string>
     <string name="ts_legend_aim">Лінія ад цэнтра клавішы да сярэдняга дотыку. Зялёны — дакладна, аранжавы — крыху міма, чырвоны — часта міма.</string>
     <string name="ts_try">Праверыць ужывую</string>
-    <string name="ts_try_hint">Надрукуйце тут на VKeyboard…</string>
+    <string name="ts_try_hint">Надрукуйце тут на pKeyboard…</string>
     <string name="ts_try_sub">Апошнія дотыкі з’яўляюцца на ўзоры кропкамі (чырвоная — самая новая). Яны захоўваюцца, толькі пакуль адкрыты гэты экран.</string>
     <string name="ts_insights">Што відаць</string>
     <string name="ts_insights_none">Пакуль нічога.</string>
@@ -563,7 +563,7 @@
     <string name="vo_err_generic">Галасавы ўвод не спрацаваў. Паспрабуйце яшчэ раз.</string>
     <string name="vo_perm_granted">Мікрафон дазволены. Націсніце 🎤 яшчэ раз, каб гаварыць.</string>
     <string name="vo_perm_denied">Для галасавога ўводу патрэбны мікрафон.</string>
-    <string name="vo_perm_settings">Дазвольце мікрафон для VKeyboard у раздзеле «Дазволы», потым зноў націсніце 🎤.</string>
+    <string name="vo_perm_settings">Дазвольце мікрафон для pKeyboard у раздзеле «Дазволы», потым зноў націсніце 🎤.</string>
     <string name="ui_btn_voice">🎤 Голас</string>
     <string name="ui_tap_opt_voice">Запусціць галасавы ўвод</string>
     <string name="ui_tap_voice">Націсканне: галасавы ўвод</string>

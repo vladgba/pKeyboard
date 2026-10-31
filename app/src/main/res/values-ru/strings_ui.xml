@@ -12,10 +12,10 @@
     <string name="ui_restored_default">Восстановлено значение по умолчанию</string>
     <string name="ui_home_tagline">Лёгкая клавиатура, которую можно настроить под себя: раскладки, темы, жесты, сочетания клавиш и макросы.</string>
     <string name="ui_home_setup">Начало работы</string>
-    <string name="ui_step1">1. Включите VKeyboard</string>
-    <string name="ui_step1_sub">Откроются системные настройки. Включите там VKeyboard.</string>
+    <string name="ui_step1">1. Включите pKeyboard</string>
+    <string name="ui_step1_sub">Откроются системные настройки. Включите там pKeyboard.</string>
     <string name="ui_step2">2. Сделайте её основной</string>
-    <string name="ui_step2_sub">Выберите VKeyboard в списке клавиатур.</string>
+    <string name="ui_step2_sub">Выберите pKeyboard в списке клавиатур.</string>
     <string name="ui_step3">3. Попробуйте здесь:</string>
     <string name="ui_home_customize">Настройка</string>
     <string name="ui_home_settings_sub">Поведение, размеры, время касаний, вибрация</string>
@@ -147,7 +147,7 @@
     <string name="words_import_none">В файле не найдено слов (прочитано %2$d)</string>
     <string name="words_system_empty">Личный словарь Android пуст</string>
     <string name="words_exported_system">Добавлено %1$d слов в личный словарь Android</string>
-    <string name="words_system_denied">Android не дал доступ к личному словарю. Сделайте VKeyboard текущей клавиатурой и попробуйте снова.</string>
+    <string name="words_system_denied">Android не дал доступ к личному словарю. Сделайте pKeyboard текущей клавиатурой и попробуйте снова.</string>
     <string name="words_failed">Ошибка: %1$s</string>
     <string name="words_working">Обработка…</string>
     <string name="ui_set_split_gap">Промежуток разделения</string>
@@ -254,7 +254,7 @@
     <string name="ui_tester_copy">Копировать код</string>
     <string name="ui_tester_capture_back">Перехватывать и кнопку «Назад»</string>
     <string name="ui_tester_capture_back_sub">Если включено, выйти с этого экрана можно стрелкой вверху</string>
-    <string name="ui_tester_remap_note">Назначения работают, пока вы печатаете на VKeyboard. В раскладке можно задать собственные назначения — они важнее.</string>
+    <string name="ui_tester_remap_note">Назначения работают, пока вы печатаете на pKeyboard. В раскладке можно задать собственные назначения — они важнее.</string>
     <string name="ui_tester_log">Журнал событий</string>
     <string name="ui_remap_hidden">Также когда клавиатура скрыта</string>
     <string name="ui_remap_hidden_too">также когда скрыта</string>
@@ -386,7 +386,7 @@
     <string name="dict_err_text">Введите текст для вставки</string>
     <string name="dict_err_exists">Такое сокращение уже есть</string>
     <string name="pk_title">Физические кнопки</string>
-    <string name="pk_intro">Пусть физические кнопки делают другое, пока вы печатаете на VKeyboard. Например: «Громкость вниз» двигает курсор, кнопка пульта печатает ваш e-mail, а клавиша клавиатуры переключает язык.</string>
+    <string name="pk_intro">Пусть физические кнопки делают другое, пока вы печатаете на pKeyboard. Например: «Громкость вниз» двигает курсор, кнопка пульта печатает ваш e-mail, а клавиша клавиатуры переключает язык.</string>
     <string name="pk_enabled">Применять мои изменения кнопок</string>
     <string name="pk_enabled_sub">Выключите, чтобы все кнопки снова работали как обычно, не удаляя изменений</string>
     <string name="pk_step1">1. Нажмите кнопку, которую хотите изменить</string>
@@ -417,7 +417,7 @@
     <string name="pk_opt_block_sub">Игнорировать кнопку во время набора (например, от случайных нажатий)</string>
     <string name="pk_opt_restore">…снова работать как обычно</string>
     <string name="pk_opt_restore_sub">Убрать мое изменение для этой кнопки</string>
-    <string name="pk_hidden_note">Без этого изменение работает, только пока клавиши VKeyboard на экране. В любом случае должно быть активно текстовое поле.</string>
+    <string name="pk_hidden_note">Без этого изменение работает, только пока клавиши pKeyboard на экране. В любом случае должно быть активно текстовое поле.</string>
     <string name="pk_switches_to">переключает на %1$s</string>
     <string name="pk_does_nothing">ничего не делает</string>
     <string name="ts_title">Карта касаний</string>
@@ -439,7 +439,7 @@
     <string name="ts_legend_heat">Цветные пятна показывают, где вы касаетесь клавиатуры. Синий — редко, красный — чаще всего.</string>
     <string name="ts_legend_aim">Линия от центра клавиши к среднему касанию. Зелёный — точно, оранжевый — немного мимо, красный — часто мимо.</string>
     <string name="ts_try">Проверить вживую</string>
-    <string name="ts_try_hint">Напечатайте здесь на VKeyboard…</string>
+    <string name="ts_try_hint">Напечатайте здесь на pKeyboard…</string>
     <string name="ts_try_sub">Последние касания появляются на образце точками (красная — самая новая). Они хранятся, только пока открыт этот экран.</string>
     <string name="ts_insights">Что видно</string>
     <string name="ts_insights_none">Пока ничего.</string>

@@ -12,10 +12,10 @@
     <string name="ui_restored_default">Se restableció el valor predeterminado</string>
     <string name="ui_home_tagline">Un teclado ligero que adaptas a ti: distribuciones, temas, gestos, atajos y macros.</string>
     <string name="ui_home_setup">Primeros pasos</string>
-    <string name="ui_step1">1. Activa VKeyboard</string>
-    <string name="ui_step1_sub">Se abren los ajustes del sistema. Activa VKeyboard allí.</string>
+    <string name="ui_step1">1. Activa pKeyboard</string>
+    <string name="ui_step1_sub">Se abren los ajustes del sistema. Activa pKeyboard allí.</string>
     <string name="ui_step2">2. Haz que sea tu teclado</string>
-    <string name="ui_step2_sub">Elige VKeyboard en la lista de teclados.</string>
+    <string name="ui_step2_sub">Elige pKeyboard en la lista de teclados.</string>
     <string name="ui_step3">3. Pruébalo aquí:</string>
     <string name="ui_home_customize">Personalizar</string>
     <string name="ui_home_settings_sub">Comportamiento, tamaños, tiempos de toque, vibración</string>
@@ -147,7 +147,7 @@
     <string name="words_import_none">No se encontraron palabras en este archivo (leídas %2$d)</string>
     <string name="words_system_empty">El diccionario personal de Android está vacío</string>
     <string name="words_exported_system">Se añadieron %1$d palabras al diccionario personal de Android</string>
-    <string name="words_system_denied">Android no permitió acceder al diccionario personal. Haz de VKeyboard tu teclado actual e inténtalo de nuevo.</string>
+    <string name="words_system_denied">Android no permitió acceder al diccionario personal. Haz de pKeyboard tu teclado actual e inténtalo de nuevo.</string>
     <string name="words_failed">Error: %1$s</string>
     <string name="words_working">Procesando…</string>
     <string name="ui_set_split_gap">Separación</string>
@@ -254,7 +254,7 @@
     <string name="ui_tester_copy">Copiar código</string>
     <string name="ui_tester_capture_back">Capturar también el botón Atrás</string>
     <string name="ui_tester_capture_back_sub">Si está activado, sal de esta pantalla con la flecha de arriba</string>
-    <string name="ui_tester_remap_note">Las reasignaciones funcionan mientras escribes con VKeyboard. Una distribución también puede definir las suyas, que tienen prioridad.</string>
+    <string name="ui_tester_remap_note">Las reasignaciones funcionan mientras escribes con pKeyboard. Una distribución también puede definir las suyas, que tienen prioridad.</string>
     <string name="ui_tester_log">Registro de eventos</string>
     <string name="ui_remap_hidden">También con el teclado oculto</string>
     <string name="ui_remap_hidden_too">también oculto</string>
@@ -386,7 +386,7 @@
     <string name="dict_err_text">Introduce el texto que se insertará</string>
     <string name="dict_err_exists">Esa abreviatura ya existe</string>
     <string name="pk_title">Botones físicos</string>
-    <string name="pk_intro">Haz que los botones físicos hagan otra cosa mientras escribes con VKeyboard. Por ejemplo: Bajar volumen mueve el cursor, un botón del mando escribe tu correo o una tecla del teclado cambia de idioma.</string>
+    <string name="pk_intro">Haz que los botones físicos hagan otra cosa mientras escribes con pKeyboard. Por ejemplo: Bajar volumen mueve el cursor, un botón del mando escribe tu correo o una tecla del teclado cambia de idioma.</string>
     <string name="pk_enabled">Usar mis cambios de botones</string>
     <string name="pk_enabled_sub">Desactívalo para que todos los botones funcionen con normalidad sin borrar tus cambios</string>
     <string name="pk_step1">1. Pulsa el botón que quieres cambiar</string>
@@ -417,7 +417,7 @@
     <string name="pk_opt_block_sub">Ignorar este botón mientras escribo (p. ej. contra pulsaciones accidentales)</string>
     <string name="pk_opt_restore">…funcionar con normalidad</string>
     <string name="pk_opt_restore_sub">Quitar mi cambio para este botón</string>
-    <string name="pk_hidden_note">Sin esto, el cambio solo funciona mientras las teclas de VKeyboard están en pantalla. En ambos casos debe haber un campo de texto activo.</string>
+    <string name="pk_hidden_note">Sin esto, el cambio solo funciona mientras las teclas de pKeyboard están en pantalla. En ambos casos debe haber un campo de texto activo.</string>
     <string name="pk_switches_to">cambia a %1$s</string>
     <string name="pk_does_nothing">no hace nada</string>
     <string name="ts_title">Mapa de toques</string>
@@ -439,7 +439,7 @@
     <string name="ts_legend_heat">Las manchas de color muestran dónde tocas el teclado. Azul = pocas veces, rojo = más veces.</string>
     <string name="ts_legend_aim">Línea del centro de la tecla a tu toque medio. Verde = en el blanco, naranja = algo desviado, rojo = a menudo desviado.</string>
     <string name="ts_try">Pruébalo en directo</string>
-    <string name="ts_try_hint">Escribe aquí con VKeyboard…</string>
+    <string name="ts_try_hint">Escribe aquí con pKeyboard…</string>
     <string name="ts_try_sub">Tus últimos toques aparecen como puntos en la vista previa (el rojo es el más reciente). Solo se conservan mientras esta pantalla está abierta.</string>
     <string name="ts_insights">Lo que muestra</string>
     <string name="ts_insights_none">Aún nada.</string>
@@ -563,7 +563,7 @@
     <string name="vo_err_generic">El dictado por voz ha fallado. Inténtalo de nuevo.</string>
     <string name="vo_perm_granted">Micrófono permitido. Toca 🎤 de nuevo para hablar.</string>
     <string name="vo_perm_denied">El dictado por voz necesita el micrófono.</string>
-    <string name="vo_perm_settings">Permite el micrófono para VKeyboard en Permisos y luego toca 🎤 de nuevo.</string>
+    <string name="vo_perm_settings">Permite el micrófono para pKeyboard en Permisos y luego toca 🎤 de nuevo.</string>
     <string name="ui_btn_voice">🎤 Voz</string>
     <string name="ui_tap_opt_voice">Iniciar dictado por voz</string>
     <string name="ui_tap_voice">Toque: dictado por voz</string>
@@ -623,7 +623,7 @@
     <string name="ui_language_system_with">Predeterminado del sistema (%1$s)</string>
     <string name="settings">Ajustes</string>
     <string name="you_can_test">Puedes probar el teclado aquí</string>
-    <string name="welcome_to_keyb">¡Te damos la bienvenida a VKeyboard!</string>
+    <string name="welcome_to_keyb">¡Te damos la bienvenida a pKeyboard!</string>
     <string name="heavy_press">Pulsación fuerte</string>
     <string name="long_press">Pulsación larga</string>
     <string name="save">Guardar</string>

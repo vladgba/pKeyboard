@@ -12,10 +12,10 @@
     <string name="ui_restored_default">Възстановена е стойността по подразбиране</string>
     <string name="ui_home_tagline">Лека клавиатура, която настройвате по свой вкус: подредби, теми, жестове, клавишни комбинации и макроси.</string>
     <string name="ui_home_setup">Първи стъпки</string>
-    <string name="ui_step1">1. Включете VKeyboard</string>
-    <string name="ui_step1_sub">Ще се отворят системните настройки. Включете VKeyboard там.</string>
+    <string name="ui_step1">1. Включете pKeyboard</string>
+    <string name="ui_step1_sub">Ще се отворят системните настройки. Включете pKeyboard там.</string>
     <string name="ui_step2">2. Направете я основна</string>
-    <string name="ui_step2_sub">Изберете VKeyboard от списъка с клавиатури.</string>
+    <string name="ui_step2_sub">Изберете pKeyboard от списъка с клавиатури.</string>
     <string name="ui_step3">3. Опитайте тук:</string>
     <string name="ui_home_customize">Персонализиране</string>
     <string name="ui_home_settings_sub">Поведение, размери, време за докосване, вибрация</string>
@@ -147,7 +147,7 @@
     <string name="words_import_none">Във файла няма думи (прочетени %2$d)</string>
     <string name="words_system_empty">Личният речник на Android е празен</string>
     <string name="words_exported_system">Добавени %1$d думи в личния речник на Android</string>
-    <string name="words_system_denied">Android не позволи достъп до личния речник. Направете VKeyboard текуща клавиатура и опитайте отново.</string>
+    <string name="words_system_denied">Android не позволи достъп до личния речник. Направете pKeyboard текуща клавиатура и опитайте отново.</string>
     <string name="words_failed">Грешка: %1$s</string>
     <string name="words_working">Обработка…</string>
     <string name="ui_set_split_gap">Разстояние при разделяне</string>
@@ -254,7 +254,7 @@
     <string name="ui_tester_copy">Копиране на кода</string>
     <string name="ui_tester_capture_back">Прихващай и бутона „Назад“</string>
     <string name="ui_tester_capture_back_sub">Когато е включено, излизайте от екрана със стрелката горе</string>
-    <string name="ui_tester_remap_note">Пренастройките важат, докато пишете с VKeyboard. Подредбата може да има свои пренастройки, които са с приоритет.</string>
+    <string name="ui_tester_remap_note">Пренастройките важат, докато пишете с pKeyboard. Подредбата може да има свои пренастройки, които са с приоритет.</string>
     <string name="ui_tester_log">Дневник на събитията</string>
     <string name="ui_remap_hidden">И когато клавиатурата е скрита</string>
     <string name="ui_remap_hidden_too">и когато е скрита</string>
@@ -386,7 +386,7 @@
     <string name="dict_err_text">Въведете текста за вмъкване</string>
     <string name="dict_err_exists">Това съкращение вече съществува</string>
     <string name="pk_title">Физически бутони</string>
-    <string name="pk_intro">Накарайте физическите бутони да правят друго, докато пишете с VKeyboard. Например: „Звук надолу“ мести курсора, бутон от дистанционното пише имейла ви, а клавиш от клавиатурата сменя езика.</string>
+    <string name="pk_intro">Накарайте физическите бутони да правят друго, докато пишете с pKeyboard. Например: „Звук надолу“ мести курсора, бутон от дистанционното пише имейла ви, а клавиш от клавиатурата сменя езика.</string>
     <string name="pk_enabled">Използвай промените ми на бутоните</string>
     <string name="pk_enabled_sub">Изключете, за да работят всички бутони нормално, без да изтривате промените</string>
     <string name="pk_step1">1. Натиснете бутона, който искате да промените</string>
@@ -417,7 +417,7 @@
     <string name="pk_opt_block_sub">Игнорирай бутона, докато пиша (напр. срещу случайни натискания)</string>
     <string name="pk_opt_restore">…отново да работи нормално</string>
     <string name="pk_opt_restore_sub">Премахни промяната ми за този бутон</string>
-    <string name="pk_hidden_note">Без това промяната работи само докато клавишите на VKeyboard са на екрана. И в двата случая трябва да има активно текстово поле.</string>
+    <string name="pk_hidden_note">Без това промяната работи само докато клавишите на pKeyboard са на екрана. И в двата случая трябва да има активно текстово поле.</string>
     <string name="pk_switches_to">сменя към %1$s</string>
     <string name="pk_does_nothing">не прави нищо</string>
     <string name="ts_title">Карта на докосванията</string>
@@ -439,7 +439,7 @@
     <string name="ts_legend_heat">Цветните петна показват къде по клавиатурата докосвате. Синьо = рядко, червено = най-често.</string>
     <string name="ts_legend_aim">Линия от центъра на клавиша до средното докосване. Зелено = точно, оранжево = малко встрани, червено = често встрани.</string>
     <string name="ts_try">Изпробвайте на живо</string>
-    <string name="ts_try_hint">Пишете тук с VKeyboard…</string>
+    <string name="ts_try_hint">Пишете тук с pKeyboard…</string>
     <string name="ts_try_sub">Последните ви докосвания се появяват като точки върху образеца (червената е най-новата). Пазят се само докато този екран е отворен.</string>
     <string name="ts_insights">Какво показва</string>
     <string name="ts_insights_none">Още нищо.</string>
@@ -563,7 +563,7 @@
     <string name="vo_err_generic">Гласовото въвеждане не успя. Опитайте отново.</string>
     <string name="vo_perm_granted">Микрофонът е разрешен. Докоснете 🎤 отново, за да говорите.</string>
     <string name="vo_perm_denied">Гласовото въвеждане изисква микрофона.</string>
-    <string name="vo_perm_settings">Разрешете микрофона за VKeyboard в „Разрешения“, после докоснете 🎤 отново.</string>
+    <string name="vo_perm_settings">Разрешете микрофона за pKeyboard в „Разрешения“, после докоснете 🎤 отново.</string>
     <string name="ui_btn_voice">🎤 Глас</string>
     <string name="ui_tap_opt_voice">Стартирай гласово въвеждане</string>
     <string name="ui_tap_voice">Докосване: гласово въвеждане</string>

@@ -12,10 +12,10 @@
     <string name="ui_restored_default">Відновлено типове значення</string>
     <string name="ui_home_tagline">Легка клавіатура, яку можна налаштувати під себе: розкладки, теми, жести, поєднання клавіш і макроси.</string>
     <string name="ui_home_setup">Початок роботи</string>
-    <string name="ui_step1">1. Увімкніть VKeyboard</string>
-    <string name="ui_step1_sub">Відкриються системні налаштування. Увімкніть там VKeyboard.</string>
+    <string name="ui_step1">1. Увімкніть pKeyboard</string>
+    <string name="ui_step1_sub">Відкриються системні налаштування. Увімкніть там pKeyboard.</string>
     <string name="ui_step2">2. Зробіть її основною</string>
-    <string name="ui_step2_sub">Виберіть VKeyboard у списку клавіатур.</string>
+    <string name="ui_step2_sub">Виберіть pKeyboard у списку клавіатур.</string>
     <string name="ui_step3">3. Спробуйте тут:</string>
     <string name="ui_home_customize">Налаштування</string>
     <string name="ui_home_settings_sub">Поведінка, розміри, час дотиків, вібрація</string>
@@ -147,7 +147,7 @@
     <string name="words_import_none">У файлі не знайдено слів (прочитано %2$d)</string>
     <string name="words_system_empty">Особистий словник Android порожній</string>
     <string name="words_exported_system">Додано %1$d слів до особистого словника Android</string>
-    <string name="words_system_denied">Android не дав доступу до особистого словника. Зробіть VKeyboard поточною клавіатурою і спробуйте ще раз.</string>
+    <string name="words_system_denied">Android не дав доступу до особистого словника. Зробіть pKeyboard поточною клавіатурою і спробуйте ще раз.</string>
     <string name="words_failed">Помилка: %1$s</string>
     <string name="words_working">Обробка…</string>
     <string name="ui_set_split_gap">Проміжок розділення</string>
@@ -254,7 +254,7 @@
     <string name="ui_tester_copy">Копіювати код</string>
     <string name="ui_tester_capture_back">Перехоплювати й кнопку «Назад»</string>
     <string name="ui_tester_capture_back_sub">Якщо ввімкнено, вийти з цього екрана можна стрілкою вгорі</string>
-    <string name="ui_tester_remap_note">Призначення діють, поки ви друкуєте на VKeyboard. Розкладка може мати власні призначення — вони важливіші.</string>
+    <string name="ui_tester_remap_note">Призначення діють, поки ви друкуєте на pKeyboard. Розкладка може мати власні призначення — вони важливіші.</string>
     <string name="ui_tester_log">Журнал подій</string>
     <string name="ui_remap_hidden">Також коли клавіатура прихована</string>
     <string name="ui_remap_hidden_too">також коли прихована</string>
@@ -386,7 +386,7 @@
     <string name="dict_err_text">Введіть текст для вставлення</string>
     <string name="dict_err_exists">Таке скорочення вже є</string>
     <string name="pk_title">Фізичні кнопки</string>
-    <string name="pk_intro">Нехай фізичні кнопки роблять інше, поки ви друкуєте на VKeyboard. Наприклад: «Гучність вниз» рухає курсор, кнопка пульта друкує ваш e-mail, а клавіша клавіатури перемикає мову.</string>
+    <string name="pk_intro">Нехай фізичні кнопки роблять інше, поки ви друкуєте на pKeyboard. Наприклад: «Гучність вниз» рухає курсор, кнопка пульта друкує ваш e-mail, а клавіша клавіатури перемикає мову.</string>
     <string name="pk_enabled">Застосовувати мої зміни кнопок</string>
     <string name="pk_enabled_sub">Вимкніть, щоб усі кнопки знову працювали звично, не видаляючи змін</string>
     <string name="pk_step1">1. Натисніть кнопку, яку хочете змінити</string>
@@ -417,7 +417,7 @@
     <string name="pk_opt_block_sub">Ігнорувати кнопку під час набору (напр., від випадкових натискань)</string>
     <string name="pk_opt_restore">…знову працювати звично</string>
     <string name="pk_opt_restore_sub">Прибрати мою зміну для цієї кнопки</string>
-    <string name="pk_hidden_note">Без цього зміна діє, лише поки клавіші VKeyboard на екрані. У будь-якому разі має бути активне текстове поле.</string>
+    <string name="pk_hidden_note">Без цього зміна діє, лише поки клавіші pKeyboard на екрані. У будь-якому разі має бути активне текстове поле.</string>
     <string name="pk_switches_to">перемикає на %1$s</string>
     <string name="pk_does_nothing">нічого не робить</string>
     <string name="ts_title">Мапа дотиків</string>
@@ -439,7 +439,7 @@
     <string name="ts_legend_heat">Кольорові плями показують, де ви торкаєтеся клавіатури. Синій — рідко, червоний — найчастіше.</string>
     <string name="ts_legend_aim">Лінія від центру клавіші до середнього дотику. Зелений — точно, помаранчевий — трохи повз, червоний — часто повз.</string>
     <string name="ts_try">Перевірити наживо</string>
-    <string name="ts_try_hint">Надрукуйте тут на VKeyboard…</string>
+    <string name="ts_try_hint">Надрукуйте тут на pKeyboard…</string>
     <string name="ts_try_sub">Останні дотики з’являються на зразку крапками (червона — найновіша). Вони зберігаються, лише поки відкрито цей екран.</string>
     <string name="ts_insights">Що видно</string>
     <string name="ts_insights_none">Поки нічого.</string>

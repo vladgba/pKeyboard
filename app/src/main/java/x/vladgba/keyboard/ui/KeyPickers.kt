@@ -156,7 +156,7 @@ internal object ComboBuilder {
         // A physical keyboard press fills everything in at once.
         dialog.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK || event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
-            // Only physical keyboards: on-screen keyboards (VKeyboard sends letters as key events) just type.
+            // Only physical keyboards: on-screen keyboards (pKeyboard sends letters as key events) just type.
             if (event.flags and KeyEvent.FLAG_SOFT_KEYBOARD != 0 || event.deviceId == KeyCharacterMap.VIRTUAL_KEYBOARD)
                 return@setOnKeyListener false
             if (KeyEvent.isModifierKey(keyCode)) return@setOnKeyListener true

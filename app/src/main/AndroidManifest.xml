@@ -2,13 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <!-- Voice typing (asked only when the user starts it). -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <!-- Voice translation fallback when on-device translation is unavailable. -->
-    <uses-permission android:name="android.permission.INTERNET"/>
 
-    <!-- Android 11+: be able to see the system speech recognition service. -->
+    <!-- Voice input lives in the optional pKeyboard Voice add-on (module :voice), which holds the
+         microphone and internet permissions; the keyboard has neither. Both APKs declare this
+         signature permission, so only apps signed with the same key can use the add-on, whatever
+         the order of installation. -->
+    <permission
+            android:name="${voicePackage}.permission.VOICE"
+            android:label="@string/vo_perm_label"
+            android:protectionLevel="signature"/>
+    <uses-permission android:name="${voicePackage}.permission.VOICE"/>
+
     <queries>
+        <!-- The add-on (bind its service, check its microphone permission). -->
+        <package android:name="${voicePackage}"/>
+        <!-- Android 11+: list the speech recognition services for the provider setting. -->
         <intent>
             <action android:name="android.speech.RecognitionService"/>
         </intent>
@@ -34,11 +42,6 @@
         <activity android:name=".ui.LayoutsManage"/>
         <activity android:name=".ui.ThemeManage"/>
         <activity android:name=".ui.ThemeEditorActivity"/>
-        <activity
-                android:name=".ui.VoicePermissionActivity"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                android:excludeFromRecents="true"
-                android:noHistory="true"/>
         <activity android:name=".ui.DictionaryActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.WordsActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.FieldTestActivity" android:windowSoftInputMode="adjustResize"/>

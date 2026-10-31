@@ -660,6 +660,9 @@
     <string name="vo_set_mic">Microphone permission</string>
     <string name="vo_mic_ok">Allowed</string>
     <string name="vo_mic_missing">Not allowed yet. Tap to allow.</string>
+    <string name="vo_mic_no_addon">pKeyboard Voice add-on is not installed. Tap to get it.</string>
+    <string name="vo_err_no_addon">Voice input needs the pKeyboard Voice add-on.</string>
+    <string name="vo_perm_label" translatable="false">pKeyboard voice input</string>
     <string name="vo_starting">Starting…</string>
     <string name="vo_listening">Speak now…</string>
     <string name="vo_processing">Recognizing…</string>

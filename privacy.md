@@ -1,12 +1,13 @@
 # pKeyboard Privacy Policy
 
-**Effective date:** 2026-10-07
-**App:** pKeyboard (`x.vladgba.keyboard`), an open-source keyboard for Android
+**Effective date:** 2026-10-31
+**App:** pKeyboard (`x.vladgba.keyboard`), an open-source keyboard for Android, and its optional add-on pKeyboard Voice (`x.vladgba.keyboard.voice`)
 **Developer:** Vladyslav Tishyn (vladgba), vladgba@gmail.com
 
 ## Summary
 
-- pKeyboard has **no internet permission**, so the app itself cannot send anything off your phone.
+- pKeyboard has **no internet and no microphone permission**, so the keyboard itself cannot record you or send anything off your phone.
+- Voice typing is a separate, optional add-on (**pKeyboard Voice**). Only if you install it does voice input become available; it alone holds the microphone and internet permissions.
 - The developer **receives no data** from the app: no analytics, no crash reports, no ads, no accounts, no third-party libraries.
 - Everything pKeyboard stores stays **on your phone**, inside the app's private storage.
 
@@ -26,15 +27,25 @@ Uninstalling the app, or clearing its data in Android settings, deletes all of t
 
 ## Permissions
 
+**pKeyboard**
+
 | Permission | Why |
 |---|---|
 | Vibrate | Key-press vibration feedback |
+| pKeyboard voice input (signature) | Talking to the pKeyboard Voice add-on. Only apps signed by the same developer can use it |
+
+**pKeyboard Voice** (optional add-on)
+
+| Permission | Why |
+|---|---|
 | Microphone (`RECORD_AUDIO`) | Voice typing only. Asked the first time you start voice typing; you can refuse or revoke it at any time |
 | Internet (`INTERNET`) | Voice translation fallback (`@tr_voice`) when on-device translation is unavailable. No analytics, tracking or telemetry |
 
+The add-on has no screen of its own and stores nothing. Only pKeyboard can use it.
+
 ## Voice typing
 
-pKeyboard does not recognise speech itself. When you start voice typing, it uses the speech recognition service installed on your phone (for example, Google's). While you are dictating, your audio goes to that service, which may process it on the device or online under **its own** privacy policy. The *Prefer offline recognition* setting asks the service to stay on the device where supported. The microphone is used only while the voice overlay is shown.
+Neither pKeyboard nor the add-on recognises speech itself. When you start voice typing, the add-on uses the speech recognition service installed on your phone (for example, Google's). While you are dictating, your audio goes to that service, which may process it on the device or online under **its own** privacy policy. The *Prefer offline recognition* setting asks the service to stay on the device where supported. The microphone is used only while the voice overlay is shown.
 
 ## Data handled by other software
 

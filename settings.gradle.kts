@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "pKeyboard"
 include(":app")
+// Optional add-on APK: voice input + translation (microphone and internet permissions).
+include(":voice")

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Only apps signed with the same key (pKeyboard) may use the voice service. pKeyboard
+         declares the same permission, so the order of installation doesn't matter. -->
+    <permission
+            android:name="${applicationId}.permission.VOICE"
+            android:label="@string/perm_voice_label"
+            android:protectionLevel="signature"/>
+
+    <!-- Voice typing (asked only when the user starts it the first time). -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- Online translation fallback for @tr_voice when on-device translation is unavailable. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Android 11+: be able to see the system speech recognition services. -->
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService"/>
+        </intent>
+    </queries>
+
+    <application
+            android:allowBackup="false"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Material.NoActionBar">
+
+        <service
+                android:name=".VoiceService"
+                android:exported="true"
+                android:permission="${applicationId}.permission.VOICE"/>
+
+        <!-- Microphone permission prompt, opened by the keyboard (a service can't show it). -->
+        <activity
+                android:name=".MicPermissionActivity"
+                android:exported="true"
+                android:permission="${applicationId}.permission.VOICE"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:excludeFromRecents="true"
+                android:noHistory="true"/>
+    </application>
+</manifest>

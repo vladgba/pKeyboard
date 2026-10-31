@@ -1,31 +1,37 @@
 package x.vladgba.keyboard.keyboard
 
-import android.Manifest
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.speech.RecognitionListener
-import android.speech.RecognizerIntent
-import android.speech.SpeechRecognizer
+import android.os.Handler
+import android.os.IBinder
+import android.os.Looper
+import android.os.Message
+import android.os.Messenger
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import x.vladgba.keyboard.R
 import x.vladgba.keyboard.core.*
-import x.vladgba.keyboard.ui.VoicePermissionActivity
+import x.vladgba.keyboard.voiceapi.VoiceProtocol as P
 import java.util.Locale
 
 data class TranslationSpec(val sourceLang: String, val targetLang: String)
 
 /**
- * Voice typing with the system speech recognizer (android.speech, no libraries).
+ * Voice typing through the optional **pKeyboard Voice** add-on (separate APK, see shared/voiceapi).
+ * The add-on owns the microphone and internet permissions, runs the system speech recognizer and
+ * the translation fallback; the keyboard itself has neither permission.
  *
  * - Partial results are shown as composing (underlined) text and in the overlay, the final result
  *   is committed with a space before it when needed and a capital where the field asks for one.
- * - The language follows the current layout (`"voiceLang"` in a layout overrides it).
- * - Without a recognition service it switches to a voice keyboard (input method with a "voice"
- *   subtype) if one is installed.
- * Everything runs on the main thread, as SpeechRecognizer requires.
+ * - The language follows the current layout ("voiceLang" in a layout overrides it).
+ * - Without the add-on (or without a recognizer) it switches to a voice keyboard (input method with
+ *   a "voice" subtype) if one is installed.
  */
 class VoiceInput(private val kb: Keyboard) {
     enum class State { IDLE, STARTING, LISTENING, PROCESSING }
@@ -39,46 +45,85 @@ class VoiceInput(private val kb: Keyboard) {
     var level = 0f
         private set
 
-    private var recognizer: SpeechRecognizer? = null
     private val ctx get() = kb.ctx
 
     var translationSpec: TranslationSpec? = null
         private set
     val isTranslating get() = translationSpec != null
 
-    private var transRequestId = 0L
-
     val active get() = state != State.IDLE
+
+    private var session = 0
+    private var service: Messenger? = null
+    private var bound = false
+    private var pendingStart: Bundle? = null
+    private val events = Messenger(Handler(Looper.getMainLooper(), ::onEvent))
+
+    private val connection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
+            service = Messenger(binder)
+            pendingStart?.let { sendStart(it) }
+            pendingStart = null
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            service = null
+            if (active) {
+                clearComposing()
+                finish()
+                toast(R.string.vo_err_generic)
+            }
+        }
+    }
 
     fun toggle(spec: TranslationSpec? = null) = if (active) stop() else start(spec)
     fun toggle(specStr: String?) = toggle(specStr?.let { parseTrVoiceSpec(it) })
 
     fun start(spec: TranslationSpec? = null) {
         if (kb.isEditor || active) return
-        if (Build.VERSION.SDK_INT >= 23 && ctx.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            // An input method can't show the permission dialog itself.
-            ctx.startActivity(Intent(ctx, VoicePermissionActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        val voicePkg = P.voicePackage(ctx.packageName)
+        if (!isInstalled(voicePkg)) {
+            if (!switchToVoiceKeyboard()) {
+                toast(R.string.vo_err_no_addon)
+                openUrl(ADDON_URL)
+            }
             return
         }
-        val rec = createRecognizer()
-        if (rec == null) {
-            if (!switchToVoiceKeyboard()) toast(R.string.vo_err_unavailable)
+        if (Build.VERSION.SDK_INT >= 23 &&
+            ctx.packageManager.checkPermission(android.Manifest.permission.RECORD_AUDIO, voicePkg) != PackageManager.PERMISSION_GRANTED) {
+            requestMicrophone()
             return
         }
-        recognizer = rec
-        rec.setRecognitionListener(listener)
         translationSpec = spec
         partial = ""
         level = 0f
         state = State.STARTING
         spaceBefore = null
+        session++
         // Started from a long-press: that finger's "up" goes to the overlay, so release keys now.
         kb.resetTouches()
-        try {
-            rec.startListening(recognizerIntent())
-        } catch (e: Exception) {
-            kb.prStack(e)
-            finish()
+        val args = Bundle().apply {
+            putString(P.KEY_LANGUAGE, language())
+            putBoolean(P.KEY_OFFLINE, Settings.bool(SETTING_VOICE_OFFLINE))
+            if (Settings.bool(SETTING_VOICE_PROVIDER_ENABLED, false)) {
+                SpeechProviders.resolve(true, Settings.str(SETTING_VOICE_PROVIDER), SpeechProviders.available(ctx))
+                    ?.let { putString(P.KEY_PROVIDER, it.flattenToString()) }
+            }
+            spec?.let {
+                val src = if (it.sourceLang.isNotBlank() && it.sourceLang != "auto") it.sourceLang
+                          else language().substringBefore("-").lowercase(Locale.ROOT)
+                putString(P.KEY_TRANSLATE_FROM, src)
+                putString(P.KEY_TRANSLATE_TO, it.targetLang.substringBefore("-").lowercase(Locale.ROOT))
+            }
+        }
+        if (service != null) sendStart(args) else {
+            pendingStart = args
+            if (!bind()) {
+                pendingStart = null
+                finish()
+                toast(R.string.vo_err_no_addon)
+                return
+            }
         }
         kb.invalidate()
     }
@@ -88,7 +133,7 @@ class VoiceInput(private val kb: Keyboard) {
         when (state) {
             State.STARTING, State.LISTENING -> {
                 state = State.PROCESSING
-                recognizer?.stopListening()
+                send(P.MSG_STOP)
                 kb.invalidate()
             }
             State.PROCESSING -> cancel() // second tap while waiting: give up
@@ -99,16 +144,19 @@ class VoiceInput(private val kb: Keyboard) {
     /** Abort without inserting anything (keyboard hidden, field changed). */
     fun cancel() {
         if (!active) return
-        transRequestId++
-        recognizer?.cancel()
+        send(P.MSG_CANCEL)
+        pendingStart = null
         clearComposing()
         finish()
     }
 
     fun release() {
         cancel()
-        recognizer?.destroy()
-        recognizer = null
+        if (bound) {
+            try { ctx.unbindService(connection) } catch (_: Exception) { }
+            bound = false
+            service = null
+        }
     }
 
     private fun finish() {
@@ -116,36 +164,95 @@ class VoiceInput(private val kb: Keyboard) {
         partial = ""
         level = 0f
         translationSpec = null
-        recognizer?.destroy()
-        recognizer = null
+        session++ // late events of the finished session are ignored
         kb.invalidate()
     }
 
-    private fun createRecognizer(): SpeechRecognizer? {
-        if (Settings.bool(SETTING_VOICE_PROVIDER_ENABLED, false)) {
-            val selected = SpeechProviders.resolve(true, Settings.str(SETTING_VOICE_PROVIDER), SpeechProviders.available(ctx))
-            if (selected != null) {
-                try { return SpeechRecognizer.createSpeechRecognizer(ctx, selected) }
-                catch (e: Exception) { android.util.Log.w("pKeyboard", "Selected speech provider unavailable", e) }
-            }
-        }
-        val offline = Settings.bool(SETTING_VOICE_OFFLINE)
-        if (offline && Build.VERSION.SDK_INT >= 33 && SpeechRecognizer.isOnDeviceRecognitionAvailable(ctx)) {
-            return try { SpeechRecognizer.createOnDeviceSpeechRecognizer(ctx) } catch (_: Exception) { null }
-        }
-        if (!SpeechRecognizer.isRecognitionAvailable(ctx)) return null
-        return try { SpeechRecognizer.createSpeechRecognizer(ctx) } catch (_: Exception) { null }
+    private fun bind(): Boolean {
+        if (bound) return true
+        var flags = Context.BIND_AUTO_CREATE or Context.BIND_IMPORTANT
+        // Lets the add-on use the microphone while the keyboard is on screen (Android 11+).
+        if (Build.VERSION.SDK_INT >= 30) flags = flags or Context.BIND_INCLUDE_CAPABILITIES
+        bound = try {
+            ctx.bindService(Intent().setComponent(P.service(ctx.packageName)), connection, flags)
+        } catch (_: Exception) { false }
+        return bound
     }
 
-    private fun recognizerIntent() = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-        putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-        putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
-        putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
-        putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, ctx.packageName)
-        val lang = language()
-        putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang)
-        putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, lang)
-        if (Settings.bool(SETTING_VOICE_OFFLINE)) putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true)
+    private fun sendStart(args: Bundle) {
+        val msg = Message.obtain(null, P.MSG_START, session, 0)
+        msg.data = args
+        msg.replyTo = events
+        try { service?.send(msg) } catch (e: Exception) { kb.prStack(e); finish() }
+    }
+
+    private fun send(what: Int) {
+        try { service?.send(Message.obtain(null, what, session, 0)) } catch (_: Exception) { }
+    }
+
+    private fun onEvent(msg: Message): Boolean {
+        if (msg.arg1 != session || !active) return true
+        when (msg.what) {
+            P.EV_READY -> { state = State.LISTENING; kb.invalidate() }
+            P.EV_LEVEL -> { level = msg.data.getFloat(P.KEY_LEVEL); kb.invalidate() }
+            P.EV_END_OF_SPEECH, P.EV_TRANSLATING -> {
+                if (state == State.LISTENING || state == State.STARTING) state = State.PROCESSING
+                kb.invalidate()
+            }
+            P.EV_PARTIAL -> {
+                val text = msg.data.getString(P.KEY_TEXT).orEmpty()
+                if (text.isNotEmpty()) {
+                    partial = text
+                    kb.inputConnection?.setComposingText(prepare(text), 1)
+                    kb.invalidate()
+                }
+            }
+            P.EV_RESULT -> {
+                commit(msg.data.getString(P.KEY_TEXT).orEmpty())
+                val failed = msg.data.getBoolean(P.KEY_TRANSLATE_FAILED)
+                finish()
+                if (failed) toast(R.string.vo_err_translate)
+            }
+            P.EV_NEED_PERMISSION -> {
+                clearComposing()
+                finish()
+                requestMicrophone()
+            }
+            P.EV_ERROR -> {
+                clearComposing()
+                finish()
+                val res = when (msg.arg2) {
+                    P.ERR_SILENT -> 0
+                    P.ERR_NOTHING -> R.string.vo_err_nothing
+                    P.ERR_NETWORK -> R.string.vo_err_network
+                    P.ERR_PERMISSION -> R.string.vo_err_permission
+                    P.ERR_BUSY -> R.string.vo_err_busy
+                    P.ERR_LANGUAGE -> R.string.vo_err_language
+                    P.ERR_UNAVAILABLE -> if (switchToVoiceKeyboard()) 0 else R.string.vo_err_unavailable
+                    else -> R.string.vo_err_generic
+                }
+                if (res != 0) toast(res)
+            }
+        }
+        return true
+    }
+
+    /** An input method can't show the permission dialog: the add-on's own screen asks for it. */
+    private fun requestMicrophone() {
+        try {
+            ctx.startActivity(Intent().setComponent(P.permissionActivity(ctx.packageName)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        } catch (e: Exception) {
+            kb.prStack(e)
+            toast(R.string.vo_err_permission)
+        }
+    }
+
+    private fun isInstalled(pkg: String) = try {
+        @Suppress("DEPRECATION") ctx.packageManager.getPackageInfo(pkg, 0); true
+    } catch (_: PackageManager.NameNotFoundException) { false }
+
+    private fun openUrl(url: String) {
+        try { ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } catch (_: Exception) { }
     }
 
     /** BCP 47 tag: translation source > setting > layout's "voiceLang" > known layout > system language. */
@@ -163,88 +270,6 @@ class VoiceInput(private val kb: Keyboard) {
         // For the number/emoji layouts use the last typing layout's language.
         LAYOUT_LANGS[kb.lastTypingLayout]?.let { return it }
         return Locale.getDefault().toLanguageTag()
-    }
-
-    private val listener = object : RecognitionListener {
-        override fun onReadyForSpeech(params: Bundle?) {
-            state = State.LISTENING
-            kb.invalidate()
-        }
-
-        override fun onBeginningOfSpeech() {}
-
-        override fun onRmsChanged(rmsdB: Float) {
-            // Typical range is about -2..10 dB.
-            level = ((rmsdB + 2f) / 12f).coerceIn(0f, 1f)
-            kb.invalidate()
-        }
-
-        override fun onBufferReceived(buffer: ByteArray?) {}
-
-        override fun onEndOfSpeech() {
-            if (state == State.LISTENING) state = State.PROCESSING
-            kb.invalidate()
-        }
-
-        override fun onError(error: Int) {
-            transRequestId++
-            clearComposing()
-            val msg = when (error) {
-                SpeechRecognizer.ERROR_NO_MATCH, SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> R.string.vo_err_nothing
-                SpeechRecognizer.ERROR_NETWORK, SpeechRecognizer.ERROR_NETWORK_TIMEOUT, SpeechRecognizer.ERROR_SERVER -> R.string.vo_err_network
-                SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> R.string.vo_err_permission
-                SpeechRecognizer.ERROR_RECOGNIZER_BUSY -> R.string.vo_err_busy
-                SpeechRecognizer.ERROR_CLIENT -> 0 // our own cancel/stop
-                else -> if (Build.VERSION.SDK_INT >= 31 && error == SpeechRecognizer.ERROR_LANGUAGE_NOT_SUPPORTED ||
-                    Build.VERSION.SDK_INT >= 31 && error == SpeechRecognizer.ERROR_LANGUAGE_UNAVAILABLE) R.string.vo_err_language
-                else R.string.vo_err_generic
-            }
-            finish()
-            if (msg != 0) toast(msg)
-        }
-
-        override fun onResults(results: Bundle?) {
-            val text = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull().orEmpty()
-            if (text.isBlank()) {
-                commit("")
-                finish()
-                return
-            }
-            val spec = translationSpec
-            if (spec != null) {
-                state = State.PROCESSING
-                kb.invalidate()
-                val currentReqId = ++transRequestId
-                val src = if (spec.sourceLang.isNotBlank() && spec.sourceLang != "auto") spec.sourceLang
-                          else language().substringBefore("-").lowercase(Locale.ROOT)
-                val tgt = spec.targetLang.substringBefore("-").lowercase(Locale.ROOT)
-
-                Translator.translate(ctx, text, src, tgt, onSuccess = { translated ->
-                    if (transRequestId != currentReqId || state != State.PROCESSING) return@translate
-                    commit(translated)
-                    finish()
-                }, onError = { err ->
-                    if (transRequestId != currentReqId || state != State.PROCESSING) return@translate
-                    kb.prStack(err)
-                    commit(text)
-                    finish()
-                    toast(R.string.vo_err_translate)
-                })
-            } else {
-                commit(text)
-                finish()
-            }
-        }
-
-        override fun onPartialResults(partialResults: Bundle?) {
-            val text = partialResults?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull().orEmpty()
-            if (text.isEmpty()) return
-            partial = text
-            kb.inputConnection?.setComposingText(prepare(text), 1)
-            kb.invalidate()
-        }
-
-        override fun onEvent(eventType: Int, params: Bundle?) {}
     }
 
     private fun clearComposing() {
@@ -307,6 +332,9 @@ class VoiceInput(private val kb: Keyboard) {
     private fun toast(res: Int) = Toast.makeText(ctx, res, Toast.LENGTH_SHORT).show()
 
     companion object {
+        /** Where to get the pKeyboard Voice add-on. */
+        const val ADDON_URL = "https://github.com/vladgba/pKeyboard#voice-input"
+
         /**
          * Parses voice translation specifier like `@tr_voice/ru-en`, `tr_voice:ru-en`,
          * `@tr_voice/en`, `@tr_voice`, etc.

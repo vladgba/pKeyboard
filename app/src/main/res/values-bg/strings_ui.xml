@@ -549,6 +549,8 @@
     <string name="vo_set_mic">Достъп до микрофона</string>
     <string name="vo_mic_ok">Разрешен</string>
     <string name="vo_mic_missing">Още не е разрешен. Докоснете, за да разрешите.</string>
+    <string name="vo_mic_no_addon">Добавката pKeyboard Voice не е инсталирана. Докоснете, за да я изтеглите.</string>
+    <string name="vo_err_no_addon">Гласовото въвеждане изисква добавката pKeyboard Voice.</string>
     <string name="vo_starting">Стартиране…</string>
     <string name="vo_listening">Говорете…</string>
     <string name="vo_processing">Разпознаване…</string>

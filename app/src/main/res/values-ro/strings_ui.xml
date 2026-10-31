@@ -549,6 +549,8 @@
     <string name="vo_set_mic">Permisiune pentru microfon</string>
     <string name="vo_mic_ok">Permis</string>
     <string name="vo_mic_missing">Încă nepermis. Atinge ca să permiți.</string>
+    <string name="vo_mic_no_addon">Suplimentul pKeyboard Voice nu este instalat. Atinge ca să-l obții.</string>
+    <string name="vo_err_no_addon">Introducerea vocală necesită suplimentul pKeyboard Voice.</string>
     <string name="vo_starting">Se pornește…</string>
     <string name="vo_listening">Vorbește acum…</string>
     <string name="vo_processing">Se recunoaște…</string>

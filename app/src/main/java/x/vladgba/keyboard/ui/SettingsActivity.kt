@@ -180,10 +180,22 @@ class SettingsActivity : LocalizedActivity() {
         })
         row.setOnLongClickListener { reset(SETTING_VOICE_LANG); true }
         bool(SETTING_VOICE_OFFLINE, R.string.vo_set_offline, R.string.vo_set_offline_sub, false)
-        val granted = android.os.Build.VERSION.SDK_INT < 23 ||
-            checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED
-        val mic = page.row(getString(R.string.vo_set_mic), getString(if (granted) R.string.vo_mic_ok else R.string.vo_mic_missing)) {
-            if (!granted) startActivity(Intent(this, VoicePermissionActivity::class.java))
+        // The microphone belongs to the pKeyboard Voice add-on, not to the keyboard.
+        val voicePkg = x.vladgba.keyboard.voiceapi.VoiceProtocol.voicePackage(packageName)
+        val addon = try { @Suppress("DEPRECATION") packageManager.getPackageInfo(voicePkg, 0); true }
+            catch (_: android.content.pm.PackageManager.NameNotFoundException) { false }
+        val granted = addon && (android.os.Build.VERSION.SDK_INT < 23 ||
+            packageManager.checkPermission(android.Manifest.permission.RECORD_AUDIO, voicePkg) == android.content.pm.PackageManager.PERMISSION_GRANTED)
+        val status = when { !addon -> R.string.vo_mic_no_addon; granted -> R.string.vo_mic_ok; else -> R.string.vo_mic_missing }
+        val mic = page.row(getString(R.string.vo_set_mic), getString(status)) {
+            when {
+                !addon -> try {
+                    startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(x.vladgba.keyboard.keyboard.VoiceInput.ADDON_URL)))
+                } catch (_: Exception) { }
+                !granted -> try {
+                    startActivity(Intent().setComponent(x.vladgba.keyboard.voiceapi.VoiceProtocol.permissionActivity(packageName)))
+                } catch (_: Exception) { }
+            }
         }
         mic.subtitle.setTextColor(if (granted) COLOR_OK else COLOR_WARN)
     }

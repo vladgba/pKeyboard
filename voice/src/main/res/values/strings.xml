@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="perm_voice_label">pKeyboard voice input</string>
+    <string name="mic_granted">Microphone allowed. Tap 🎤 on the keyboard again.</string>
+    <string name="mic_denied">Voice input needs the microphone.</string>
+    <string name="mic_settings">Allow the microphone for pKeyboard Voice in Permissions, then tap 🎤 again.</string>
+</resources>

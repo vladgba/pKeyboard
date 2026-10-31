@@ -549,6 +549,8 @@
     <string name="vo_set_mic">Autorisation du micro</string>
     <string name="vo_mic_ok">Autorisé</string>
     <string name="vo_mic_missing">Pas encore autorisé. Touchez pour autoriser.</string>
+    <string name="vo_mic_no_addon">Le module pKeyboard Voice n\'est pas installé. Touchez pour l\'obtenir.</string>
+    <string name="vo_err_no_addon">La saisie vocale nécessite le module pKeyboard Voice.</string>
     <string name="vo_starting">Démarrage…</string>
     <string name="vo_listening">Parlez maintenant…</string>
     <string name="vo_processing">Reconnaissance…</string>

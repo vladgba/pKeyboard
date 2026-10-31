@@ -549,6 +549,8 @@
     <string name="vo_set_mic">Mikrofonberechtigung</string>
     <string name="vo_mic_ok">Erlaubt</string>
     <string name="vo_mic_missing">Noch nicht erlaubt. Zum Erlauben tippen.</string>
+    <string name="vo_mic_no_addon">Das Add-on pKeyboard Voice ist nicht installiert. Zum Herunterladen tippen.</string>
+    <string name="vo_err_no_addon">Spracheingabe braucht das Add-on pKeyboard Voice.</string>
     <string name="vo_starting">Wird gestartet…</string>
     <string name="vo_listening">Jetzt sprechen…</string>
     <string name="vo_processing">Wird erkannt…</string>

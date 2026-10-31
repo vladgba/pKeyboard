@@ -19,6 +19,8 @@ android {
         targetSdk = 35
         testInstrumentationRunner = "x.vladgba.keyboard.core.KeyboardDeviceTests"
         resValue("string", "version", appVersionName)
+        // Package of the pKeyboard Voice add-on (module :voice) that matches this build type.
+        manifestPlaceholders["voicePackage"] = "x.vladgba.keyboard.voice"
     }
 
     buildTypes {
@@ -31,8 +33,11 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             resValue("string", "version", "$appVersionName-debug")
+            manifestPlaceholders["voicePackage"] = "x.vladgba.keyboard.voice.debug"
         }
     }
+
+    sourceSets.getByName("main").java.srcDir(rootProject.file("shared/voiceapi"))
 
     buildFeatures {
         resValues = true

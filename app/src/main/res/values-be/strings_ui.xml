@@ -549,6 +549,8 @@
     <string name="vo_set_mic">Доступ да мікрафона</string>
     <string name="vo_mic_ok">Дазволены</string>
     <string name="vo_mic_missing">Яшчэ не дазволены. Націсніце, каб дазволіць.</string>
+    <string name="vo_mic_no_addon">Дадатак pKeyboard Voice не ўсталяваны. Націсніце, каб атрымаць.</string>
+    <string name="vo_err_no_addon">Для галасавога ўводу патрэбны дадатак pKeyboard Voice.</string>
     <string name="vo_starting">Запуск…</string>
     <string name="vo_listening">Гаварыце…</string>
     <string name="vo_processing">Распазнаванне…</string>

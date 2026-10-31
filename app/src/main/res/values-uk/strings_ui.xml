@@ -549,6 +549,8 @@
     <string name="vo_set_mic">Доступ до мікрофона</string>
     <string name="vo_mic_ok">Дозволено</string>
     <string name="vo_mic_missing">Ще не дозволено. Натисніть, щоб дозволити.</string>
+    <string name="vo_mic_no_addon">Доповнення pKeyboard Voice не встановлено. Натисніть, щоб отримати.</string>
+    <string name="vo_err_no_addon">Для голосового введення потрібне доповнення pKeyboard Voice.</string>
     <string name="vo_starting">Запуск…</string>
     <string name="vo_listening">Говоріть…</string>
     <string name="vo_processing">Розпізнавання…</string>

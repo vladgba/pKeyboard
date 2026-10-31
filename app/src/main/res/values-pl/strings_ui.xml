@@ -549,6 +549,8 @@
     <string name="vo_set_mic">Dostęp do mikrofonu</string>
     <string name="vo_mic_ok">Dozwolony</string>
     <string name="vo_mic_missing">Jeszcze niedozwolony. Dotknij, aby zezwolić.</string>
+    <string name="vo_mic_no_addon">Dodatek pKeyboard Voice nie jest zainstalowany. Dotknij, aby go pobrać.</string>
+    <string name="vo_err_no_addon">Wprowadzanie głosowe wymaga dodatku pKeyboard Voice.</string>
     <string name="vo_starting">Uruchamianie…</string>
     <string name="vo_listening">Mów teraz…</string>
     <string name="vo_processing">Rozpoznawanie…</string>

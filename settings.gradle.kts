@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "VKeyboard"
+rootProject.name = "pKeyboard"
 include(":app")

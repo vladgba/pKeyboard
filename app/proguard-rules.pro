@@ -1,4 +1,4 @@
-# VKeyboard has no libraries, so these rules only squeeze the app's own code.
+# pKeyboard has no libraries, so these rules only squeeze the app's own code.
 
 # Move every class into one package with short names (smaller dex and string table).
 -repackageclasses ''

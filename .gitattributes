@@ -1,0 +1,21 @@
+# Line endings: LF in the repo, CRLF only where Windows needs it.
+* text=auto
+*.bat text eol=crlf
+*.cmd text eol=crlf
+gradlew text eol=lf
+*.sh text eol=lf
+
+# Binaries (never diff or normalise).
+*.jar binary
+*.png binary
+*.jpg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.ttf binary
+*.otf binary
+*.apk binary
+*.aab binary
+*.jks binary
+*.keystore binary
+*.zip binary

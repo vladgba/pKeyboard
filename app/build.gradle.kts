@@ -18,7 +18,6 @@ android {
         minSdk = 21
         targetSdk = 35
         testInstrumentationRunner = "x.vladgba.keyboard.core.KeyboardDeviceTests"
-        resValue("string", "app_name", "VKeyboard")
         resValue("string", "version", appVersionName)
     }
 
@@ -31,7 +30,6 @@ android {
         getByName("debug") {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
-            resValue("string", "app_name", "VKeyb $appVersionName dev")
             resValue("string", "version", "$appVersionName-debug")
         }
     }

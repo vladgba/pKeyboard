@@ -166,8 +166,8 @@ class MainActivity : LocalizedActivity() {
 
     // Referenced from about_app.xml via android:onClick
     fun openMail(v: View) = openUrl("mailto:vladgba@gmail.com")
-    fun openWiki(v: View) = openUrl("https://github.com/vladgba/VKeyboard/wiki")
-    fun openGithub(v: View) = openUrl("https://github.com/vladgba/VKeyboard")
+    fun openWiki(v: View) = openUrl("https://github.com/vladgba/pKeyboard/wiki")
+    fun openGithub(v: View) = openUrl("https://github.com/vladgba/pKeyboard")
     fun openPrivacyPolicy(v: View) = openUrl("http://zcxv.icu/vkeyb/privacy.html")
     fun openTermsOfUse(v: View) = openUrl("http://zcxv.icu/vkeyb/terms.html")
 }

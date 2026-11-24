@@ -1,6 +1,6 @@
 # pKeyboard Privacy Policy
 
-**Effective date:** 2026-10-31
+**Effective date:** 2026-11-16
 **App:** pKeyboard (`x.vladgba.keyboard`), an open-source keyboard for Android, and its optional add-on pKeyboard Voice (`x.vladgba.keyboard.voice`)
 **Developer:** Vladyslav Tishyn (vladgba), vladgba@gmail.com
 
@@ -21,7 +21,9 @@ The app saves only what you create or turn on:
 - the app language and editor preferences;
 - **touch statistics**, only if you turn on the touch heatmap (off by default). These are counts of where keys were pressed and how far from the key centre, not the text you typed or the order of key presses. Nothing is recorded in password fields or in fields that ask keyboards not to learn (for example, incognito mode). You can clear them at any time in the app.
 
-pKeyboard does not keep a history or log of what you type. Text passes through the keyboard to the app you are typing in, the same as with any keyboard.
+When word learning is enabled, pKeyboard saves learned words and their frequencies locally for suggestions. It does not keep a chronological log of everything you type. You can manage and delete learned words in the Words screen. Learned words are included in keyboard backups and in dictionary exports you request.
+
+When clipboard history is enabled, the keyboard reads the system clipboard. Clips marked sensitive by the source app are skipped. Recent entries remain in memory, up to 25 entries, and normally expire after 15 minutes (configurable). Pinned entries are saved in the app’s files until you unpin or delete them; pinned entries are included in app backups. Avoid pinning sensitive text. Text passes through the keyboard to the app you are typing in, the same as with any keyboard.
 
 Uninstalling the app, or clearing its data in Android settings, deletes all of this.
 
@@ -41,11 +43,15 @@ Uninstalling the app, or clearing its data in Android settings, deletes all of t
 | Microphone (`RECORD_AUDIO`) | Voice typing only. Asked the first time you start voice typing; you can refuse or revoke it at any time |
 | Internet (`INTERNET`) | Voice translation fallback (`@tr_voice`) when on-device translation is unavailable. No analytics, tracking or telemetry |
 
-The add-on has no screen of its own and stores nothing. Only pKeyboard can use it.
+The add-on has no screen of its own. Its voice service is restricted to the companion keyboard through a signature permission.
 
 ## Voice typing
 
 Neither pKeyboard nor the add-on recognises speech itself. When you start voice typing, the add-on uses the speech recognition service installed on your phone (for example, Google's). While you are dictating, your audio goes to that service, which may process it on the device or online under **its own** privacy policy. The *Prefer offline recognition* setting asks the service to stay on the device where supported. The microphone is used only while the voice overlay is shown.
+
+## Online voice translation
+
+When voice translation is requested and on-device translation is unavailable or fails, the add-on sends the recognized text and source/target language information over HTTPS to Google Translate. If that request fails, it tries MyMemory (Translated). These providers receive the text and connection metadata such as your IP address; their own retention and privacy practices apply. This is separate from the speech recognition provider’s handling of audio. Do not use online translation for text you do not want these services to receive.
 
 ## Data handled by other software
 

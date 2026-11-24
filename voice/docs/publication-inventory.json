@@ -1,0 +1,49 @@
+{
+  "reviewed_on": "2026-11-16",
+  "relocated_on": "2026-11-17",
+  "apps": [
+    {
+      "slug": "vkeyboard-voice",
+      "name": "pKeyboard Voice",
+      "project": "..",
+      "module": ".",
+      "package": "x.vladgba.keyboard.voice",
+      "min_sdk": "21",
+      "target_sdk": "35",
+      "version_name": "1.0.0",
+      "version_code": null,
+      "version_source": "../version.properties",
+      "commit": "c9cfb3b8e4825fe0df4bcc6a80f221adfd499516",
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "permission_scope": "main source manifest only",
+      "removed_permissions": [],
+      "allow_backup": "false",
+      "source_evidence": {
+        "network": [
+          "src/main/java/x/vladgba/keyboard/voice/Translator.kt"
+        ],
+        "storage": [],
+        "sharing": [],
+        "learning_clipboard": [],
+        "speech_translation": [
+          "src/main/java/x/vladgba/keyboard/voice/Translator.kt",
+          "src/main/java/x/vladgba/keyboard/voice/VoiceService.kt"
+        ]
+      },
+      "review_items": [
+        "Target SDK 35: below the current phone-app submission minimum of API 36, effective August 31, 2026 (extension ended November 1, 2026). See the official target API reference. Do not change a deliberate runtime target without redesign.",
+        "Owner must confirm developer identity/contact, production support and privacy URLs, countries, pricing, ads, target age and content rating.",
+        "Audit runtime traffic, dependencies and final merged release manifest before signing off Data safety. Source manifest alone is not a complete data audit.",
+        "Create a signed release AAB, test the release on a device and complete the Play Console testing/review requirements applicable to this account. No release binary was built by this documentation task."
+      ],
+      "publication_files": {
+        "store": "store",
+        "site": "docs/site/index.md",
+        "privacy": "../privacy.md"
+      }
+    }
+  ]
+}

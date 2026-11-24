@@ -1,0 +1,7 @@
+Enable speech input for the companion keyboard using your installed recognition service.
+
+Optional voice typing and translation add-on for pKeyboard.
+
+Requires Android API 21 or later.
+
+This is an optional add-on for pKeyboard.

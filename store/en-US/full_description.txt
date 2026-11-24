@@ -1,0 +1,5 @@
+Edit layouts and themes, assign key gestures, use local word suggestions and manage clipboard entries.
+
+Customize keyboard layouts, gestures, suggestions and text tools.
+
+Requires Android API 21 or later.

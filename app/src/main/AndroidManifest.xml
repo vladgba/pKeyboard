@@ -70,6 +70,12 @@
                 <data android:mimeType="application/zip"/>
                 <data android:mimeType="application/octet-stream"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="vkeyboard" android:host="install"/>
+            </intent-filter>
         </activity>
 
         <!-- Keep the service class name stable: the system stores enabled IMEs by component name. -->

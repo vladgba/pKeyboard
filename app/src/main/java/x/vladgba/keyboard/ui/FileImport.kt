@@ -23,6 +23,17 @@ class FileImport : LocalizedActivity() {
         val uri = intent.data
         if (intent.action != Intent.ACTION_VIEW || uri == null) return finish()
         try {
+            if (uri.scheme == "vkeyboard") {
+                val name = uri.getQueryParameter("name")?.takeIf { it.isNotBlank() } ?: "imported"
+                val ext = if (uri.getQueryParameter("type") == THEME_EXT) THEME_EXT else LAYOUT_EXT
+                val raw = uri.getQueryParameter("content")
+                val b64 = uri.getQueryParameter("data")
+                val content = raw ?: b64?.let {
+                    String(android.util.Base64.decode(it, android.util.Base64.URL_SAFE or android.util.Base64.NO_WRAP), Charsets.UTF_8)
+                } ?: return finish()
+                ask(name, ext, content)
+                return
+            }
             val fileName = displayName(uri)
             if (fileName.endsWith(".zip")) {
                 confirm(this, R.string.bk_confirm_restore, R.string.bk_confirm_restore_msg, R.string.yes) {

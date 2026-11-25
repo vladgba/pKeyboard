@@ -1,6 +1,7 @@
 package x.vladgba.keyboard.keyboard
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -8,6 +9,9 @@ import android.graphics.Typeface
 import android.text.TextUtils
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
+import android.view.WindowManager
+import x.vladgba.keyboard.R
 import x.vladgba.keyboard.core.*
 
 /**
@@ -18,6 +22,33 @@ import x.vladgba.keyboard.core.*
 class SuggestionBar(ctx: Context, private val kb: Keyboard) : View(ctx) {
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { textAlign = Paint.Align.CENTER }
     private var pressedSlot = -1
+    private var longPressed = false
+
+    private val longPressRunnable = Runnable {
+        val slot = pressedSlot
+        if (slot !in 0..2) return@Runnable
+        longPressed = true
+        pressedSlot = -1
+        invalidate()
+        val s = kb.suggestions.getOrNull(rankAt[slot]) ?: return@Runnable
+        if (s.emoji) return@Runnable
+        val word = s.text
+        val d = AlertDialog.Builder(context)
+            .setTitle(word)
+            .setPositiveButton(R.string.delete) { _, _ ->
+                UserWords.submit { UserWords.remove(context, word) }
+                kb.onSelectionChanged()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .create()
+        d.window?.let { w ->
+            w.attributes = w.attributes.apply {
+                token = windowToken
+                type = WindowManager.LayoutParams.TYPE_APPLICATION_ATTACHED_DIALOG
+            }
+        }
+        d.show()
+    }
 
     /** Slot (0 left, 1 middle, 2 right) → rank of the suggestion shown there (0 = best). */
     private val rankAt = intArrayOf(1, 0, 2)
@@ -58,16 +89,27 @@ class SuggestionBar(ctx: Context, private val kb: Keyboard) : View(ctx) {
         val slot = (e.x / (width / 3f)).toInt().coerceIn(0, 2)
         when (e.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
+                longPressed = false
                 pressedSlot = slot
                 invalidate()
+                postDelayed(longPressRunnable, ViewConfiguration.getLongPressTimeout().toLong())
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (slot != pressedSlot) {
+                    removeCallbacks(longPressRunnable)
+                    pressedSlot = -1
+                    invalidate()
+                }
             }
             MotionEvent.ACTION_UP -> {
+                removeCallbacks(longPressRunnable)
                 val was = pressedSlot
                 pressedSlot = -1
                 invalidate()
-                if (was == slot) kb.acceptSuggestion(rankAt[slot])
+                if (!longPressed && was == slot) kb.acceptSuggestion(rankAt[slot])
             }
             MotionEvent.ACTION_CANCEL -> {
+                removeCallbacks(longPressRunnable)
                 pressedSlot = -1
                 invalidate()
             }

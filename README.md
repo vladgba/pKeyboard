@@ -23,7 +23,7 @@ A customizable, lightweight keyboard for Android. Every key can do something on 
 
 pKeyboard has **no microphone and no internet permission**. It never learns from password fields or fields that ask not to.
 
-## Voice input
+### Voice add-on
 
 Voice typing (🎤 and `@tr_voice` translation) lives in a separate, optional add-on, **pKeyboard Voice** (`x.vladgba.keyboard.voice`), so the keyboard itself can stay offline and never touch the microphone. Install it next to pKeyboard; without it, the 🎤 key switches to another voice keyboard if you have one.
 
@@ -36,6 +36,7 @@ The add-on has no screen of its own. Only apps signed with the same key as pKeyb
 
 ### Notes
 
+- Backups made from the keyboard can be restored on another phone; `examples/backup-example` shows what one contains, and `server/layouts.php` is a minimal layout server for the Layouts screen.
 - Every setting in `settings.txt`, the layout format and the key options are described in the [guide](docs/GUIDE.md).
 
 ## Build
